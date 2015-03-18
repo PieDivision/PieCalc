@@ -8,20 +8,20 @@ CFLAGS := -std=c99 -Wall -Wextra -pedantic -g
 LIBS := -lm
 GTK := `pkg-config --cflags --libs gtk+-3.0`
 
-SOURCE := src
-OBJ := build
+CODE := c
+SRC := src
+BUILDDIR := build
+SOURCES := $(shell find $(SRC) -type f -name *.$(CODE))
+OBJ := $(patsubst $(SRC)/%, $(BUILDDIR)/%, $(SOURCES:.$(CODE)=.o)) 
 TARGET := bin/pie_calc
 
-$(TARGET): createDirs $(OBJ)/main.o
-	$(CC) $(CFLAGS) $(OBJ)/main.o -o $(TARGET)
+$(TARGET): $(OBJ)
+	mkdir -p bin
+	$(CC) $(CFLAGS) $^ -o $(TARGET) $(LIBS)
 
-$(OBJ)/main.o: $(SOURCE)/main.c
-	$(CC) $(CFLAGS) -c $(SOURCE)/main.c -o $(OBJ)/main.o
+$(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
+	mkdir -p $(BUILDDIR)
+	$(CC) $(CFLAGS) -c -o $@ $< $(LIBS)
 
-createDirs:
-	mkdir bin build || true
-
-clean:
-	rm $(TARGET) || true
-	rm $(OBJ)/* || true
-	rmdir bin build
+removeDirs:
+	rm -rf bin build || true
