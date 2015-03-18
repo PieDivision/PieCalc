@@ -1,4 +1,8 @@
 # PieCalc Makefile by David Benes
+# Written in Vim editor
+#
+# TODO: Time to coffee
+#
 
 ifndef CC
 	CC := gcc
