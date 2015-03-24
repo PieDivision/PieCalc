@@ -1,0 +1,6 @@
+#!/bin/sh
+
+rm xbudai00_xbarot00_xbenes41_plan.zip >/dev/null 2>&1
+wkhtmltopdf xbudai00_xbarot00_xbenes41_plan.html xbudai00_xbarot00_xbenes41_plan.pdf >/dev/null 2>&1
+zip xbudai00_xbarot00_xbenes41_plan.zip xbudai00_xbarot00_xbenes41_plan.* >/dev/null
+rm xbudai00_xbarot00_xbenes41_plan.pdf
