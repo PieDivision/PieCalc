@@ -52,9 +52,9 @@ int main(int argc, char *argv[])
 	gtk_init(&argc, &argv);
 
 	gtkBuilder = gtk_builder_new();
-	gtk_builder_add_from_file(gtkBuilder, "calc_r002.glade", NULL);
+	gtk_builder_add_from_file(gtkBuilder, "pie_calc.glade", NULL);
 	
-	gui -> window = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "Calc02"));
+	gui -> window = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "PieCalc"));
 
 	gtk_builder_connect_signals (gtkBuilder, gui);
 
