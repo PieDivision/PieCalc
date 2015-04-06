@@ -151,6 +151,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -164,6 +165,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -177,6 +179,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -230,6 +233,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -243,6 +247,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -256,6 +261,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -309,7 +315,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
-                <signal name="clicked" handler="button1_clicked" object="entry1" swapped="no"/>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -324,6 +330,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -350,7 +357,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
-                <signal name="clicked" handler="button2_clicked" object="entry1" swapped="no"/>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -402,6 +409,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>

@@ -9,20 +9,17 @@ typedef struct {
 	GtkEntry *entry;
 } Gui;
 
-// Tlačítko 1
-void button1_clicked(GtkButton *w, GtkEntry *entry)
+/**
+ * Function, which handles all numeric button - it can get the actual number from its label
+ * 
+ * @param w Button which has sent the signal
+ * @param entry The display of the calculator
+ */
+void button_clicked(GtkButton *w, GtkEntry *entry)
 {
 	textBuffer = gtk_entry_get_text(entry);
 
-	gtk_entry_set_text(entry, "1");
-}
-
-// Tlačítko 2
-void button2_clicked(GtkButton *w, GtkEntry *entry)
-{
-	textBuffer = gtk_entry_get_text(entry);
-
-	gtk_entry_set_text(entry, "2");
+	gtk_entry_set_text(entry, gtk_button_get_label(w));
 }
 
 // Vymazání textového okna
