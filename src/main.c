@@ -3,6 +3,8 @@
 #include <string.h>
 
 const gchar *textBuffer;
+gchar *prom;
+gsize length = 4;
 
 typedef struct {
 	GtkWidget *window;
@@ -21,8 +23,9 @@ void button1_clicked(GtkButton *w, GtkEntry *entry)
 void button2_clicked(GtkButton *w, GtkEntry *entry)
 {
 	textBuffer = gtk_entry_get_text(entry);
-
-	gtk_entry_set_text(entry, "2");
+	prom = g_strdup(textBuffer);	
+	g_strlcat(prom, "2", 5);
+	gtk_entry_set_text(entry, prom);
 }
 
 // Vymazání textového okna
