@@ -90,17 +90,38 @@ double solve(char *expr, int len, double f(char *, int)){
 
 }
 
-// double solve(char *expr, int len, double f(char *, int)){
-// 	if(*expr != '(') return f(expr, len);
-//     if(*(expr + len - 1) != ')') return f(expr, len);
+void error(char *msg){
+	fprintf(stderr, "%s\n", msg);
+	exit(EXIT_FAILURE);
+}
 
-//     return solve_plus(expr + 1, len - 2);
-// }
-
+/**
+ * Function which converts internal string to double, only positive number are supported (minus is handled separately)
+ *
+ * @param expr Pointer to string
+ * @param len Length of string
+ * @return Returns expr converted to double
+ */
 double n(char *expr, int len){
 	double tmp = 0;
+	bool beforePoint = true;
+	double division = 0.1;
 	for(int i = 0; i < len; i++){
-		tmp = tmp * 10 + *expr - '0';
+		if(*expr == '.'){
+			if(!beforePoint) error("Too much decimal points used!");
+			beforePoint = false;
+			continue;
+		}
+
+		if(!isdigit(*expr)){
+			error("Converted number is not a digit!");
+		}
+
+		if(beforePoint) tmp = tmp * 10 + *expr - '0';
+		else {
+			tmp += (*expr - '0') * division;
+			division *= 0.1;
+		}
 		expr++;
 	}
 	return tmp;
