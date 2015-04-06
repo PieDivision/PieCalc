@@ -1,16 +1,16 @@
 # PieCalc Makefile by David Benes
 # Written in Vim editor
 #
-# TODO: Time to coffee
+# TODO: Solve dependencies
 #
 
 ifndef CC
 	CC := gcc
 endif
 
-CFLAGS := -std=c99 -Wall -Wextra -pedantic -g 
+CFLAGS := -std=c99 -Wextra -pedantic -g 
 LIBS := -lm
-GTK := `pkg-config --cflags --libs gtk+-3.0`
+GTK := -export-dynamic `pkg-config --cflags --libs gtk+-3.0`
 
 CODE := c
 SRC := src
@@ -21,11 +21,13 @@ TARGET := bin/pie_calc
 
 $(TARGET): $(OBJ)
 	mkdir -p bin
-	$(CC) $(CFLAGS) $^ -o $(TARGET) $(LIBS)
+	cp src/calc_r002.glade bin/
+	$(CC) $(CFLAGS) $(GTK) $^ -o $(TARGET) $(LIBS)
 
 $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
 	mkdir -p $(BUILDDIR)
-	$(CC) $(CFLAGS) -c -o $@ $< $(LIBS)
+	$(CC) $(CFLAGS) $(GTK) -c -o $@ $< $(LIBS)
 
 removeDirs:
-	rm -rf bin build || true
+	rm -rf build || true
+	rm -rf bin || true
