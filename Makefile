@@ -21,7 +21,7 @@ TARGET := bin/pie_calc
 
 $(TARGET): $(OBJ)
 	mkdir -p bin
-	cp src/calc_r002.glade bin/
+	cp src/pie_calc.glade bin/
 	$(CC) $(CFLAGS) $(GTK) $^ -o $(TARGET) $(LIBS)
 
 $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
