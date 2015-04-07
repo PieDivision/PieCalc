@@ -119,6 +119,14 @@ double n(string expr){
 	return tmp;
 }
 
+void split(string what, char *delimiter, string *l, string *r){
+	l->p = what.p;
+	l->len = what.p - delimiter;
+
+	r->p = delimiter + 1;
+	r->len = what.len - (delimiter - what.p) - 1;
+}
+
 double solve(string expr){
 	function *tmp = tryToFind(expr);
 	if(tmp != NULL){
@@ -145,7 +153,14 @@ double solve_pow(string expr){
 		return solve(expr);
 	}
 
-	return pow(solve_pow((string){expr.p, ptr - expr.p}), solve_pow((string){ptr + 1, expr.len - (ptr - expr.p) - 1}));
+	string l, r;
+	split(expr, ptr, &l, &r);
+
+	if(l.len == 0 || r.len == 0){
+		return NAN;
+	}
+
+	return pow(solve_pow(l), solve_pow(r));
 }
 
 double solve_multiply(string expr){
@@ -154,7 +169,14 @@ double solve_multiply(string expr){
 		return solve_pow(expr);
 	}
 
-	return solve_multiply((string){expr.p, ptr - expr.p}) * solve_multiply((string){ptr + 1, expr.len - (ptr - expr.p) - 1});
+	string l, r;
+	split(expr, ptr, &l, &r);
+
+	if(l.len == 0 || r.len == 0){
+		return NAN;
+	}
+
+	return solve_multiply(l) * solve_multiply(r);
 }
 
 double solve_div(string expr){
@@ -163,7 +185,14 @@ double solve_div(string expr){
 		return solve_multiply(expr);
 	}
 
-	return solve_div((string){expr.p, ptr - expr.p}) / solve_div((string){ptr + 1, expr.len - (ptr - expr.p) - 1});
+	string l, r;
+	split(expr, ptr, &l, &r);
+
+	if(l.len == 0 || r.len == 0){
+		return NAN;
+	}
+
+	return solve_div(l) / solve_div(r);
 }
 
 
@@ -173,7 +202,14 @@ double solve_minus(string expr){
 		return solve_div(expr);
 	}
 
-	return solve_minus((string){expr.p, ptr - expr.p}) - solve_minus((string){ptr + 1, expr.len - (ptr - expr.p) - 1});
+	string l, r;
+	split(expr, ptr, &l, &r);
+
+	if(r.len == 0){
+		return NAN;
+	}
+
+	return solve_minus(l) - solve_minus(r);
 }
 
 double solve_plus(string expr){
@@ -182,7 +218,14 @@ double solve_plus(string expr){
 		return solve_minus(expr);
 	}
 
-	return solve_plus((string){expr.p, ptr - expr.p}) + solve_plus((string){ptr + 1, expr.len - (ptr - expr.p) - 1});
+	string l, r;
+	split(expr, ptr, &l, &r);
+
+	if(r.len == 0){
+		return NAN;
+	}
+
+	return solve_plus(l) + solve_plus(r);
 }
 
 bool checkBrackets(char *expr){
