@@ -96,6 +96,7 @@ double n(char *expr, int len){
 		if(*expr == '.'){
 			if(!beforePoint) error("Too much decimal points used!");
 			beforePoint = false;
+			expr++;
 			continue;
 		}
 
