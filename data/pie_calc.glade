@@ -101,20 +101,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button20">
-                <property name="label" translatable="yes">C</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="margin_left">37</property>
-                <property name="hexpand">False</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">0</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkButton" id="button21">
                 <property name="label" translatable="yes">CE</property>
                 <property name="visible">True</property>
@@ -128,6 +114,19 @@
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
                 <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button20">
+                <property name="label" translatable="yes">C</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="delete_one" object="entry1" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
               </packing>
             </child>
           </object>
@@ -203,6 +202,7 @@
                 <property name="receives_default">True</property>
                 <property name="halign">baseline</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="arith_button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -216,6 +216,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">4</property>
@@ -285,6 +286,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="arith_button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -298,6 +300,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="margin_right">4</property>
+                <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">4</property>
@@ -324,7 +327,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
-                <signal name="clicked" handler="button1_clicked" object="entry1" swapped="no"/>
+                <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -353,6 +356,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="arith_button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -366,7 +370,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="hexpand">False</property>
-                <signal name="clicked" handler="button2_clicked" object="entry1" swapped="no"/>
+                <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -448,6 +452,7 @@
                 <property name="receives_default">True</property>
                 <property name="halign">baseline</property>
                 <property name="hexpand">False</property>
+                <signal name="clicked" handler="arith_button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
