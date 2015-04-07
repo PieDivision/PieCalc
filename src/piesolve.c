@@ -5,6 +5,8 @@
 #include <math.h>
 #include <ctype.h>
 
+#include "piemath.h"
+
 typedef struct {
 	char *p;
 	size_t len;
@@ -102,6 +104,7 @@ double n(string expr){
 		if(*(expr.p) == '.'){
 			if(!beforePoint) error("Too much decimal points used!");
 			beforePoint = false;
+			expr.p++;
 			continue;
 		}
 
@@ -147,10 +150,42 @@ double solve(string expr){
 
 }
 
+double solve_fact(string expr){
+	char *ptr = find(expr, '!', true);
+	if(ptr == NULL){
+		return solve(expr);
+	}
+
+	string l, r;
+	split(expr, ptr, &l, &r);
+
+	if(r.len != 0){
+		return solve(expr);
+	}
+
+	if(l.len == 0){
+		return NAN;
+	}
+
+	double number = solve_fact(l);
+
+	if(fabs(round(number) - number) > 0.00000001){
+		return NAN;
+	}
+
+	double rNumber = round(number);
+
+	if(rNumber < 0){
+		return NAN;
+	}
+
+	return piemathFact((unsigned int)round(number));
+}
+
 double solve_pow(string expr){
 	char *ptr = find(expr, '^', true);
 	if(ptr == NULL){
-		return solve(expr);
+		return solve_fact(expr);
 	}
 
 	string l, r;
