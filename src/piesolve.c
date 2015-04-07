@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <ctype.h>
 
 double solve_multiply(char *expr, int len);
 double solve_div(char *expr, int len);
@@ -69,26 +70,7 @@ function *tryToFind(char *expr, int len){
 	return NULL;
 }
 
-double solve(char *expr, int len, double f(char *, int)){
-	function *tmp = tryToFind(expr, len);
-	if(tmp != NULL){
-		for(int i = 0; i < len; i++){
-			if(expr[i] == '('){
-				expr += i;
-				len -= i;
-				break;
-			}
-		}
 
-		return tmp->f(solve_plus(expr, len));
-	}
-
-	if(*expr != '(') return f(expr, len);
-    if(*(expr + len - 1) != ')') return f(expr, len);
-
-     return solve_plus(expr + 1, len - 2);
-
-}
 
 void error(char *msg){
 	fprintf(stderr, "%s\n", msg);
@@ -127,41 +109,61 @@ double n(char *expr, int len){
 	return tmp;
 }
 
+double solve(char *expr, int len){
+	function *tmp = tryToFind(expr, len);
+	if(tmp != NULL){
+		for(int i = 0; i < len; i++){
+			if(expr[i] == '('){
+				expr += i;
+				len -= i;
+				break;
+			}
+		}
+
+		return tmp->f(solve_plus(expr, len));
+	}
+
+	if(*expr != '(' || *(expr + len - 1) != ')') return n(expr, len);
+
+    return solve_plus(expr + 1, len - 2);
+
+}
+
 double solve_multiply(char *expr, int len){
 	char *ptr = find(expr, '*', len);
 	if(ptr == NULL){
-		return solve(expr, len, n);
+		return solve(expr, len);
 	}
 
-	return solve(expr, ptr - expr, solve_multiply) * solve(ptr + 1, len - (ptr - expr) - 1, solve_multiply);
+	return solve_multiply(expr, ptr - expr) * solve_multiply(ptr + 1, len - (ptr - expr) - 1);
 }
 
 double solve_div(char *expr, int len){
 	char *ptr = find(expr, '/', len);
 	if(ptr == NULL){
-		return solve(expr, len, solve_multiply);
+		return solve_multiply(expr, len);
 	}
 
-	return solve(expr, ptr - expr, solve_div) / solve(ptr + 1, len - (ptr - expr) - 1, solve_div);
+	return solve_div(expr, ptr - expr) / solve_div(ptr + 1, len - (ptr - expr) - 1);
 }
 
 
 double solve_minus(char *expr, int len){
 	char *ptr = find(expr, '-', len);
 	if(ptr == NULL){
-		return solve(expr, len, solve_div);
+		return solve_div(expr, len);
 	}
 
-	return solve(expr, ptr - expr, solve_minus) - solve(ptr + 1, len - (ptr - expr) - 1, solve_minus);
+	return solve_minus(expr, ptr - expr) - solve_minus(ptr + 1, len - (ptr - expr) - 1);
 }
 
 double solve_plus(char *expr, int len){
 	char *ptr = find(expr, '+', len);
 	if(ptr == NULL){
-		return solve(expr, len, solve_minus);
+		return solve_minus(expr, len);
 	}
 
-	return solve(expr, ptr - expr, solve_plus) + solve(ptr + 1, len - (ptr - expr) - 1, solve_plus);
+	return solve_plus(expr, ptr - expr) + solve_plus(ptr + 1, len - (ptr - expr) - 1);
 }
 
 double pieSolver(char *expr){
