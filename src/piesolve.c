@@ -129,10 +129,19 @@ double solve(char *expr, int len){
 
 }
 
-double solve_multiply(char *expr, int len){
+double solve_pow(char *expr, int len){
 	char *ptr = find(expr, '*', len);
 	if(ptr == NULL){
 		return solve(expr, len);
+	}
+
+	return pow(solve_pow(expr, ptr - expr), solve_pow(ptr + 1, len - (ptr - expr) - 1));
+}
+
+double solve_multiply(char *expr, int len){
+	char *ptr = find(expr, '*', len);
+	if(ptr == NULL){
+		return solve_pow(expr, len);
 	}
 
 	return solve_multiply(expr, ptr - expr) * solve_multiply(ptr + 1, len - (ptr - expr) - 1);
