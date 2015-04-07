@@ -134,7 +134,7 @@ double solve(char *expr, int len){
 }
 
 double solve_pow(char *expr, int len){
-	char *ptr = find(expr, '*', len, true);
+	char *ptr = find(expr, '^', len, true);
 	if(ptr == NULL){
 		return solve(expr, len);
 	}
