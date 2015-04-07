@@ -47,7 +47,7 @@
           <object class="GtkEntry" id="entry1">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="editable">False</property>
+            <property name="editable">True</property>
             <property name="progress_fraction">0.01</property>
           </object>
           <packing>
