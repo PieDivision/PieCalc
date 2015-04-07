@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-const gchar *textBuffer;
-gchar *prom;
+char text[1000];
 
 typedef struct {
 	GtkWidget *window;
@@ -12,22 +11,30 @@ typedef struct {
 } Gui;
 
 /**
- * Function, which handles all numeric button - it can get the actual number from its label
+ * @brief Function, which handles all numeric button - it can get the actual number from its label
  * 
  * @param w Button which has sent the signal
  * @param entry The display of the calculator
  */
 void numeric_button_clicked(GtkButton *w, GtkEntry *entry)
 {
-	textBuffer = gtk_entry_get_text(entry);
-	prom = g_strdup(textBuffer);
-	g_strlcat(prom, gtk_button_get_label(w), 5);
-	gtk_entry_set_text(entry, prom);
+	strcpy(text, gtk_entry_get_text(entry));
+	strcat(text, gtk_button_get_label(w));
+	gtk_entry_set_text(entry, text);
 }
 
 void arith_button_clicked(GtkButton *w, GtkEntry *entry)
 {
-	
+	strcpy(text, gtk_entry_get_text(entry));
+	strcat(text, gtk_button_get_label(w));
+	gtk_entry_set_text(entry, text);
+}
+
+void delete_one(GtkButton *w, GtkEntry *entry)
+{
+	strcpy(text, gtk_entry_get_text(entry));
+	text[strlen(text) - 1] = 0;
+	gtk_entry_set_text(entry, text);
 }
 
 // Vymazání textového okna
@@ -39,12 +46,11 @@ void clear_clicked(GtkButton *w, GtkEntry *entry)
 // Odeslání rovnice a výpis výsledku
 void send_equation(GtkButton *w, GtkEntry *entry)
 {
-	textBuffer = gtk_entry_get_text(entry);
-	char *equation = (char *)textBuffer;
-	if(strlen(equation) == 0)
+	strcpy(text, gtk_entry_get_text(entry));
+	if(strlen(text) == 0)
 		gtk_entry_set_text(entry, "Syntax error");
 	else
-		printf("%s\n", equation);
+		printf("%s\n", text);
 }
 
 int main(int argc, char *argv[])
