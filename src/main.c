@@ -4,28 +4,30 @@
 
 const gchar *textBuffer;
 gchar *prom;
-gsize length = 4;
 
 typedef struct {
 	GtkWidget *window;
 	GtkEntry *entry;
+	GtkLabel *label;
 } Gui;
 
-// Tlačítko 1
-void button1_clicked(GtkButton *w, GtkEntry *entry)
+/**
+ * Function, which handles all numeric button - it can get the actual number from its label
+ * 
+ * @param w Button which has sent the signal
+ * @param entry The display of the calculator
+ */
+void numeric_button_clicked(GtkButton *w, GtkEntry *entry)
 {
 	textBuffer = gtk_entry_get_text(entry);
-
-	gtk_entry_set_text(entry, "1");
+	prom = g_strdup(textBuffer);
+	g_strlcat(prom, gtk_button_get_label(w), 5);
+	gtk_entry_set_text(entry, prom);
 }
 
-// Tlačítko 2
-void button2_clicked(GtkButton *w, GtkEntry *entry)
+void arith_button_clicked(GtkButton *w, GtkEntry *entry)
 {
-	textBuffer = gtk_entry_get_text(entry);
-	prom = g_strdup(textBuffer);	
-	g_strlcat(prom, "2", 5);
-	gtk_entry_set_text(entry, prom);
+	
 }
 
 // Vymazání textového okna
@@ -58,6 +60,8 @@ int main(int argc, char *argv[])
 	gtk_builder_add_from_file(gtkBuilder, "pie_calc.glade", NULL);
 	
 	gui -> window = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "PieCalc"));
+	gui -> entry = GTK_ENTRY(gtk_builder_get_object(gtkBuilder, "entry1"));
+	gui -> label = GTK_LABEL(gtk_builder_get_object(gtkBuilder, "label1"));
 
 	gtk_builder_connect_signals (gtkBuilder, gui);
 

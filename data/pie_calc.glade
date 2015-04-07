@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.12"/>
-  <object class="GtkWindow" id="Calc02">
+  <object class="GtkWindow" id="PieCalc">
     <property name="can_focus">False</property>
     <child>
       <object class="GtkBox" id="box1">
@@ -57,22 +57,44 @@
           </packing>
         </child>
         <child>
-          <placeholder/>
+          <object class="GtkLabel" id="label1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="xalign">1</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
         </child>
         <child>
           <object class="GtkGrid" id="grid5">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="row_homogeneous">True</property>
+            <property name="column_homogeneous">True</property>
             <child>
-              <object class="GtkButton" id="button20">
-                <property name="label" translatable="yes">C</property>
+              <object class="GtkButton" id="button22">
+                <property name="label" translatable="yes">(</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="margin_left">37</property>
               </object>
               <packing>
-                <property name="left_attach">0</property>
+                <property name="left_attach">3</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button23">
+                <property name="label" translatable="yes">)</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
                 <property name="top_attach">0</property>
               </packing>
             </child>
@@ -82,15 +104,27 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
+                <property name="vexpand">False</property>
                 <signal name="clicked" handler="clear_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
-                <property name="left_attach">1</property>
+                <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
+                <property name="width">2</property>
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkButton" id="button20">
+                <property name="label" translatable="yes">C</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -114,12 +148,15 @@
           <object class="GtkGrid" id="grid4">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="column_homogeneous">True</property>
             <child>
               <object class="GtkButton" id="button15">
                 <property name="label" translatable="yes">7</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -132,6 +169,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -144,6 +183,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -156,6 +197,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="halign">baseline</property>
+                <property name="hexpand">False</property>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -163,11 +206,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button19">
-                <property name="label" translatable="yes">/</property>
+              <object class="GtkButton" id="button9">
+                <property name="label" translatable="yes">^</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
@@ -185,12 +229,16 @@
           <object class="GtkGrid" id="grid3">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="row_homogeneous">True</property>
+            <property name="column_homogeneous">True</property>
             <child>
               <object class="GtkButton" id="button10">
                 <property name="label" translatable="yes">4</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -203,6 +251,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -215,9 +265,25 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button6">
+                <property name="label" translatable="yes">-</property>
+                <property name="width_request">0</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
                 <property name="top_attach">0</property>
               </packing>
             </child>
@@ -234,18 +300,6 @@
                 <property name="top_attach">0</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkButton" id="button6">
-                <property name="label" translatable="yes">-</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">0</property>
-              </packing>
-            </child>
           </object>
           <packing>
             <property name="expand">True</property>
@@ -257,13 +311,16 @@
           <object class="GtkGrid" id="grid2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="row_homogeneous">True</property>
+            <property name="column_homogeneous">True</property>
             <child>
               <object class="GtkButton" id="button5">
                 <property name="label" translatable="yes">1</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <signal name="clicked" handler="button1_clicked" object="entry1" swapped="no"/>
+                <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -273,9 +330,12 @@
             <child>
               <object class="GtkButton" id="button7">
                 <property name="label" translatable="yes">3</property>
+                <property name="width_request">-1</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -284,25 +344,14 @@
             </child>
             <child>
               <object class="GtkButton" id="button8">
-                <property name="label" translatable="yes">x</property>
+                <property name="label" translatable="yes">*</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
               </object>
               <packing>
                 <property name="left_attach">3</property>
-                <property name="top_attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="button9">
-                <property name="label" translatable="yes">^</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
                 <property name="top_attach">0</property>
               </packing>
             </child>
@@ -312,10 +361,23 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <signal name="clicked" handler="button2_clicked" object="entry1" swapped="no"/>
+                <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button13">
+                <property name="label" translatable="yes">x!</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
                 <property name="top_attach">0</property>
               </packing>
             </child>
@@ -330,27 +392,18 @@
           <object class="GtkGrid" id="grid1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="row_homogeneous">True</property>
+            <property name="column_homogeneous">True</property>
             <child>
               <object class="GtkButton" id="button2">
                 <property name="label" translatable="yes">.</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="button3">
-                <property name="label" translatable="yes">RAND</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
                 <property name="top_attach">0</property>
               </packing>
             </child>
@@ -360,6 +413,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
+                <signal name="clicked" handler="button_clicked" object="entry1" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -372,10 +427,38 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
                 <signal name="clicked" handler="send_equation" object="entry1" swapped="no"/>
               </object>
               <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button19">
+                <property name="label" translatable="yes">/</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">baseline</property>
+                <property name="hexpand">False</property>
+              </object>
+              <packing>
                 <property name="left_attach">3</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button3">
+                <property name="label" translatable="yes">RAND</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="hexpand">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
                 <property name="top_attach">0</property>
               </packing>
             </child>
