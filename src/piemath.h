@@ -2,7 +2,7 @@
 #define PIEMATH_H
 
 double piemathAdd(double a, double b);
-double piemathSubstract(double a, double b);
+double piemathSubtract(double a, double b);
 double piemathMultiply(double a, double b);
 double piemathDivide(double a, double b);
 double piemathLn(double a);
