@@ -10,15 +10,19 @@ double solve_div(char *expr, int len);
 double solve_minus(char *expr, int len);
 double solve_plus(char *expr, int len);
 
-char *find(char *str, char c, int len){
+char *find(char *str, char c, int len, bool right){
 	int level = 0;
 
-	for(int i = 0; i < len; i++, str++){
+	if(right){
+		str += len - 1;
+	}
+
+	for(int i = 0; i < len; i++){
 		if(*str == '(') level++;
-
-		if(*str == ')') level--;
-
+		else if(*str == ')') level--;
 		if(*str == c && level == 0) return str;
+
+		str += right ? -1 : 1;
 	}
 
 	return NULL;
@@ -130,7 +134,7 @@ double solve(char *expr, int len){
 }
 
 double solve_pow(char *expr, int len){
-	char *ptr = find(expr, '*', len);
+	char *ptr = find(expr, '^', len, true);
 	if(ptr == NULL){
 		return solve(expr, len);
 	}
@@ -139,7 +143,7 @@ double solve_pow(char *expr, int len){
 }
 
 double solve_multiply(char *expr, int len){
-	char *ptr = find(expr, '*', len);
+	char *ptr = find(expr, '*', len, false);
 	if(ptr == NULL){
 		return solve_pow(expr, len);
 	}
@@ -148,7 +152,7 @@ double solve_multiply(char *expr, int len){
 }
 
 double solve_div(char *expr, int len){
-	char *ptr = find(expr, '/', len);
+	char *ptr = find(expr, '/', len, false);
 	if(ptr == NULL){
 		return solve_multiply(expr, len);
 	}
@@ -158,7 +162,7 @@ double solve_div(char *expr, int len){
 
 
 double solve_minus(char *expr, int len){
-	char *ptr = find(expr, '-', len);
+	char *ptr = find(expr, '-', len, false);
 	if(ptr == NULL){
 		return solve_div(expr, len);
 	}
@@ -167,7 +171,7 @@ double solve_minus(char *expr, int len){
 }
 
 double solve_plus(char *expr, int len){
-	char *ptr = find(expr, '+', len);
+	char *ptr = find(expr, '+', len, false);
 	if(ptr == NULL){
 		return solve_minus(expr, len);
 	}
