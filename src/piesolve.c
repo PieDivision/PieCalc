@@ -166,6 +166,24 @@ double solve_plus(char *expr, int len){
 	return solve_plus(expr, ptr - expr) + solve_plus(ptr + 1, len - (ptr - expr) - 1);
 }
 
+bool checkBrackets(char *expr){
+	int brackets = 0;
+	while(*expr){
+		if(*expr == '(') brackets++;
+		else if(*expr == ')'){
+			brackets--;
+			if(brackets < 0) return false;
+		}
+		expr++;
+	}
+
+	return true;
+}
+
 double pieSolver(char *expr){
+	if(!checkBrackets(expr)){
+		return NAN;
+	}
+
 	return solve_plus(expr, strlen(expr));
 }
