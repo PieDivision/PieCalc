@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "piesolve.h"
+
 char text[1000];
 
 typedef struct {
@@ -30,6 +32,7 @@ void arith_button_clicked(GtkButton *w, GtkEntry *entry)
 	gtk_entry_set_text(entry, text);
 }
 
+// Smaže poslední znak na obrazovce
 void delete_one(GtkButton *w, GtkEntry *entry)
 {
 	strcpy(text, gtk_entry_get_text(entry));
@@ -46,11 +49,8 @@ void clear_clicked(GtkButton *w, GtkEntry *entry)
 // Odeslání rovnice a výpis výsledku
 void send_equation(GtkButton *w, GtkEntry *entry)
 {
-	strcpy(text, gtk_entry_get_text(entry));
-	if(strlen(text) == 0)
-		gtk_entry_set_text(entry, "Syntax error");
-	else
-		printf("%s\n", text);
+	sprintf(text, "%.2f", pieSolver( (char *)gtk_entry_get_text(entry) ));
+	gtk_entry_set_text(entry, text);
 }
 
 int main(int argc, char *argv[])
