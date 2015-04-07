@@ -5,32 +5,37 @@
 #include <math.h>
 #include <ctype.h>
 
-double solve_multiply(char *expr, int len);
-double solve_div(char *expr, int len);
-double solve_minus(char *expr, int len);
-double solve_plus(char *expr, int len);
+typedef struct {
+	char *p;
+	size_t len;
+} string;
 
-char *find(char *str, char c, int len, bool right){
+double solve_multiply(string expr);
+double solve_div(string expr);
+double solve_minus(string expr);
+double solve_plus(string expr);
+
+char *find(string expr, char c, bool right){
 	int level = 0;
 
 	if(right){
-		str += len - 1;
+		expr.p += expr.len - 1;
 	}
 
-	for(int i = 0; i < len; i++){
-		if(*str == '(') level++;
-		else if(*str == ')') level--;
-		if(*str == c && level == 0) return str;
+	for(size_t i = 0; i < expr.len; i++){
+		if(*(expr.p) == '(') level++;
+		else if(*(expr.p) == ')') level--;
+		if(*(expr.p) == c && level == 0) return expr.p;
 
-		str += right ? -1 : 1;
+		expr.p += right ? -1 : 1;
 	}
 
 	return NULL;
 }
 
-void print(char *expr, int len){
-	for (int i = 0; i < len; i++) {
-		putchar(*expr++);
+void print(string expr){
+	for (size_t i = 0; i < expr.len; i++) {
+		putchar(*(expr.p)++);
 	}
 	putchar('\n');
 }
@@ -44,29 +49,29 @@ function functions[] = {
 	{"sqrt", sqrt}
 };
 
-bool cmp(function *f, char *expr, int len){
-	if(len < strlen(f->name) + 2){
+bool cmp(function *f, string expr){
+	if(expr.len < strlen(f->name) + 2){
 		return false;
 	}
 
-	int i = 0;
+	size_t i = 0;
 
 	for(; i < strlen(f->name); i++){
-		if(expr[i] != f->name[i]){
+		if(expr.p[i] != f->name[i]){
 			return false;
 		}
 	}
 
-	if(expr[len - 1] != ')'){
+	if(expr.p[expr.len - 1] != ')'){
 		return false;
 	}
 
 	return true;
 }
 
-function *tryToFind(char *expr, int len){
-	for(int i = 0; i < sizeof(functions) / sizeof(function); i++){
-		if(cmp(&functions[i], expr, len)){
+function *tryToFind(string expr){
+	for(size_t i = 0; i < sizeof(functions) / sizeof(function); i++){
+		if(cmp(&functions[i], expr)){
 			return &functions[i];
 		}
 	}
@@ -88,95 +93,96 @@ void error(char *msg){
  * @param len Length of string
  * @return Returns expr converted to double
  */
-double n(char *expr, int len){
+double n(string expr){
 	double tmp = 0;
 	bool beforePoint = true;
 	double division = 0.1;
-	for(int i = 0; i < len; i++){
-		if(*expr == '.'){
+
+	for(size_t i = 0; i < expr.len; i++){
+		if(*(expr.p) == '.'){
 			if(!beforePoint) error("Too much decimal points used!");
 			beforePoint = false;
 			continue;
 		}
 
-		if(!isdigit(*expr)){
+		if(!isdigit(*(expr.p))){
 			error("Converted number is not a digit!");
 		}
 
-		if(beforePoint) tmp = tmp * 10 + *expr - '0';
+		if(beforePoint) tmp = tmp * 10 + *(expr.p) - '0';
 		else {
-			tmp += (*expr - '0') * division;
+			tmp += (*(expr.p) - '0') * division;
 			division *= 0.1;
 		}
-		expr++;
+		expr.p++;
 	}
 	return tmp;
 }
 
-double solve(char *expr, int len){
-	function *tmp = tryToFind(expr, len);
+double solve(string expr){
+	function *tmp = tryToFind(expr);
 	if(tmp != NULL){
-		for(int i = 0; i < len; i++){
-			if(expr[i] == '('){
-				expr += i;
-				len -= i;
+		for(size_t i = 0; i < expr.len; i++){
+			if(expr.p[i] == '('){
+				expr.p += i;
+				expr.len -= i;
 				break;
 			}
 		}
 
-		return tmp->f(solve_plus(expr, len));
+		return tmp->f(solve_plus(expr));
 	}
 
-	if(*expr != '(' || *(expr + len - 1) != ')') return n(expr, len);
+	if(*(expr.p) != '(' || *(expr.p + expr.len - 1) != ')') return n(expr);
 
-    return solve_plus(expr + 1, len - 2);
+    return solve_plus((string){expr.p + 1, expr.len - 2});
 
 }
 
-double solve_pow(char *expr, int len){
-	char *ptr = find(expr, '^', len, true);
+double solve_pow(string expr){
+	char *ptr = find(expr, '^', true);
 	if(ptr == NULL){
-		return solve(expr, len);
+		return solve(expr);
 	}
 
-	return pow(solve_pow(expr, ptr - expr), solve_pow(ptr + 1, len - (ptr - expr) - 1));
+	return pow(solve_pow((string){expr.p, ptr - expr.p}), solve_pow((string){ptr + 1, expr.len - (ptr - expr.p) - 1}));
 }
 
-double solve_multiply(char *expr, int len){
-	char *ptr = find(expr, '*', len, false);
+double solve_multiply(string expr){
+	char *ptr = find(expr, '*', false);
 	if(ptr == NULL){
-		return solve_pow(expr, len);
+		return solve_pow(expr);
 	}
 
-	return solve_multiply(expr, ptr - expr) * solve_multiply(ptr + 1, len - (ptr - expr) - 1);
+	return solve_multiply((string){expr.p, ptr - expr.p}) * solve_multiply((string){ptr + 1, expr.len - (ptr - expr.p) - 1});
 }
 
-double solve_div(char *expr, int len){
-	char *ptr = find(expr, '/', len, false);
+double solve_div(string expr){
+	char *ptr = find(expr, '/', false);
 	if(ptr == NULL){
-		return solve_multiply(expr, len);
+		return solve_multiply(expr);
 	}
 
-	return solve_div(expr, ptr - expr) / solve_div(ptr + 1, len - (ptr - expr) - 1);
+	return solve_div((string){expr.p, ptr - expr.p}) / solve_div((string){ptr + 1, expr.len - (ptr - expr.p) - 1});
 }
 
 
-double solve_minus(char *expr, int len){
-	char *ptr = find(expr, '-', len, false);
+double solve_minus(string expr){
+	char *ptr = find(expr, '-', false);
 	if(ptr == NULL){
-		return solve_div(expr, len);
+		return solve_div(expr);
 	}
 
-	return solve_minus(expr, ptr - expr) - solve_minus(ptr + 1, len - (ptr - expr) - 1);
+	return solve_minus((string){expr.p, ptr - expr.p}) - solve_minus((string){ptr + 1, expr.len - (ptr - expr.p) - 1});
 }
 
-double solve_plus(char *expr, int len){
-	char *ptr = find(expr, '+', len, false);
+double solve_plus(string expr){
+	char *ptr = find(expr, '+', false);
 	if(ptr == NULL){
-		return solve_minus(expr, len);
+		return solve_minus(expr);
 	}
 
-	return solve_plus(expr, ptr - expr) + solve_plus(ptr + 1, len - (ptr - expr) - 1);
+	return solve_plus((string){expr.p, ptr - expr.p}) + solve_plus((string){ptr + 1, expr.len - (ptr - expr.p) - 1});
 }
 
 bool checkBrackets(char *expr){
@@ -198,5 +204,5 @@ double pieSolver(char *expr){
 		return NAN;
 	}
 
-	return solve_plus(expr, strlen(expr));
+	return solve_plus((string){expr, strlen(expr)});
 }
