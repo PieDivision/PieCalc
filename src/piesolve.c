@@ -48,7 +48,11 @@ typedef struct {
 } function;
 
 function functions[] = {
-	{"sqrt", sqrt}
+	{"sqrt", sqrt},
+	{"log", log10},
+	{"ln", log},
+	{"cbrt", cbrt},
+	{"exp", exp}
 };
 
 bool cmp(function *f, string expr){
