@@ -121,7 +121,7 @@ double n(string expr){
 
 void split(string what, char *delimiter, string *l, string *r){
 	l->p = what.p;
-	l->len = what.p - delimiter;
+	l->len = delimiter - what.p;
 
 	r->p = delimiter + 1;
 	r->len = what.len - (delimiter - what.p) - 1;
