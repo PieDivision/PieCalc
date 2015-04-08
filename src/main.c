@@ -5,12 +5,36 @@
 #include "piesolve.h"
 
 char text[1000];
+char dynamicRes[1000];
 
-typedef struct {
+typedef struct{
 	GtkWidget *window;
 	GtkEntry *entry;
 	GtkLabel *label;
 } Gui;
+
+typedef struct{
+	char *btn;
+	char *function;
+} Translate;
+
+Translate table[] = {
+	{"RND", "rand()"},
+	{"√", "sqrt"},
+	{"x!", "!"},
+	{"x²", "^2"},
+	{"e^x", "e^"}
+};
+
+char *get_func(const char *text)
+{
+	for(unsigned int i = 0; i < sizeof(table) / sizeof(Translate); i++){
+		if(strcmp(text, table[i].btn) == 0)
+			return table[i].function;
+	}
+
+	return NULL;
+}
 
 /**
  * @brief Function, which handles all numeric button - it can get the actual number from its label
@@ -25,10 +49,23 @@ void numeric_button_clicked(GtkButton *w, GtkEntry *entry)
 	gtk_entry_set_text(entry, text);
 }
 
+void dynamic_result(GtkButton *w, GtkLabel *label)
+{
+	gtk_label_set_text(label, dynamicRes);
+}
+
 void arith_button_clicked(GtkButton *w, GtkEntry *entry)
 {
+	sprintf(dynamicRes, "%.2f", pieSolver((char *)gtk_entry_get_text(entry)));
 	strcpy(text, gtk_entry_get_text(entry));
 	strcat(text, gtk_button_get_label(w));
+	gtk_entry_set_text(entry, text);
+}
+
+void function_clicked(GtkButton *w, GtkEntry *entry)
+{
+	strcpy(text, gtk_entry_get_text(entry));
+	strcat(text, get_func(gtk_button_get_label(w)));
 	gtk_entry_set_text(entry, text);
 }
 
@@ -46,11 +83,21 @@ void clear_clicked(GtkButton *w, GtkEntry *entry)
 	gtk_entry_set_text(entry, "");
 }
 
+void clear_label(GtkButton *w, GtkLabel *label)
+{
+	gtk_label_set_text(label, "");
+}
+
 // Odeslání rovnice a výpis výsledku
 void send_equation(GtkButton *w, GtkEntry *entry)
 {
 	sprintf(text, "%.2f", pieSolver( (char *)gtk_entry_get_text(entry) ));
 	gtk_entry_set_text(entry, text);
+}
+
+void label_equation(GtkButton *w, GtkLabel *label)
+{
+	gtk_label_set_text(label, text);
 }
 
 int main(int argc, char *argv[])
