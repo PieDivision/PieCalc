@@ -181,7 +181,7 @@
                             <property name="receives_default">True</property>
                             <property name="border_width">2</property>
                             <property name="resize_mode">queue</property>
-                            <signal name="clicked" handler="delete_one_clicked" object="entry1" swapped="no"/>
+                            <signal name="clicked" handler="delete_one" object="entry1" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">4</property>
@@ -330,7 +330,7 @@
                             <property name="receives_default">True</property>
                             <property name="border_width">2</property>
                             <property name="resize_mode">queue</property>
-                            <signal name="clicked" handler="numeric_button_clicked" object="label1" swapped="no"/>
+                            <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -548,7 +548,7 @@
                             <property name="receives_default">True</property>
                             <property name="border_width">2</property>
                             <property name="resize_mode">queue</property>
-                            <signal name="clicked" handler="arith_button_clicked" object="label1" swapped="no"/>
+                            <signal name="clicked" handler="arith_button_clicked" object="entry1" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
