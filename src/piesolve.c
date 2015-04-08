@@ -7,6 +7,8 @@
 
 #include "piemath.h"
 
+char error[1000] = "";
+
 typedef struct {
 	char *p;
 	size_t len;
@@ -85,13 +87,6 @@ function *tryToFind(string expr){
 	return NULL;
 }
 
-
-
-void error(char *msg){
-	fprintf(stderr, "%s\n", msg);
-	exit(EXIT_FAILURE);
-}
-
 /**
  * Function which converts internal string to double, only positive number are supported (minus is handled separately)
  *
@@ -105,14 +100,18 @@ double n(string expr){
 
 	for(size_t i = 0; i < expr.len; i++){
 		if(*(expr.p) == '.'){
-			if(!beforePoint) error("Too much decimal points used!");
+			if(!beforePoint){
+				strcpy(error, "Too much decimal points used!");
+				return NAN;
+			}
 			beforePoint = false;
 			expr.p++;
 			continue;
 		}
 
 		if(!isdigit(*(expr.p))){
-			error("Converted number is not a digit!");
+			strcpy(error, "Converted number is not a digit!");
+			return NAN;
 		}
 
 		if(beforePoint) tmp = tmp * 10 + *(expr.p) - '0';
@@ -167,18 +166,21 @@ double solve_fact(string expr){
 	}
 
 	if(l.len == 0){
+		strcpy(error, "Factorial with no argument!");
 		return NAN;
 	}
 
 	double number = solve_fact(l);
 
 	if(fabs(round(number) - number) > 0.00000001){
+		strcpy(error, "Factorial requires integer!");
 		return NAN;
 	}
 
 	double rNumber = round(number);
 
 	if(rNumber < 0){
+		strcpy(error, "Factorial requite positive integer!");
 		return NAN;
 	}
 
@@ -195,6 +197,7 @@ double solve_pow(string expr){
 	split(expr, ptr, &l, &r);
 
 	if(l.len == 0 || r.len == 0){
+		strcpy(error, "Operand error!");
 		return NAN;
 	}
 
@@ -211,6 +214,7 @@ double solve_multiply(string expr){
 	split(expr, ptr, &l, &r);
 
 	if(l.len == 0 || r.len == 0){
+		strcpy(error, "Operand error!");
 		return NAN;
 	}
 
@@ -227,6 +231,7 @@ double solve_div(string expr){
 	split(expr, ptr, &l, &r);
 
 	if(l.len == 0 || r.len == 0){
+		strcpy(error, "Operand error!");
 		return NAN;
 	}
 
@@ -244,6 +249,7 @@ double solve_minus(string expr){
 	split(expr, ptr, &l, &r);
 
 	if(r.len == 0){
+		strcpy(error, "Operand error!");
 		return NAN;
 	}
 
@@ -260,6 +266,7 @@ double solve_plus(string expr){
 	split(expr, ptr, &l, &r);
 
 	if(r.len == 0){
+		strcpy(error, "Operand error!");
 		return NAN;
 	}
 
@@ -282,8 +289,13 @@ bool checkBrackets(char *expr){
 
 double pieSolver(char *expr){
 	if(!checkBrackets(expr)){
+		strcpy(error, "Bracket error!");
 		return NAN;
 	}
 
 	return solve_plus((string){expr, strlen(expr)});
+}
+
+char *getError(){
+	return error;
 }
