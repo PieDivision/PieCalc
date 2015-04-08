@@ -5,7 +5,7 @@
 double piemathAdd(double a, double b){
 	return a + b;
 }
-double piemathSubstract(double a, double b){
+double piemathSubtract(double a, double b){
 	return a - b;
 }
 double piemathMultiply(double a, double b){
