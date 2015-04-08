@@ -44,7 +44,6 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">_Options</property>
                     <property name="use_underline">True</property>
-                    <signal name="select" handler="gtk_main_quit" swapped="no"/>
                     <child type="submenu">
                       <object class="GtkMenu" id="menu1">
                         <property name="visible">True</property>
@@ -71,6 +70,7 @@
                             <property name="can_focus">False</property>
                             <property name="image">image2</property>
                             <property name="use_stock">False</property>
+                            <signal name="select" handler="gtk_main_quit" swapped="no"/>
                           </object>
                         </child>
                       </object>
