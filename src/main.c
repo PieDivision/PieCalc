@@ -49,6 +49,7 @@ void numeric_button_clicked(GtkButton *w, GtkEntry *entry)
 	gtk_entry_set_text(entry, text);
 }
 
+// Dynamický výpis výsledku do GtkLabel
 void dynamic_result(GtkButton *w, GtkLabel *label)
 {
 	gtk_label_set_text(label, dynamicRes);
@@ -62,6 +63,7 @@ void arith_button_clicked(GtkButton *w, GtkEntry *entry)
 	gtk_entry_set_text(entry, text);
 }
 
+// Přeložení textu tlačítek na funkce
 void function_clicked(GtkButton *w, GtkEntry *entry)
 {
 	strcpy(text, gtk_entry_get_text(entry));
@@ -83,6 +85,7 @@ void clear_clicked(GtkButton *w, GtkEntry *entry)
 	gtk_entry_set_text(entry, "");
 }
 
+// Vymazání GtkLabel
 void clear_label(GtkButton *w, GtkLabel *label)
 {
 	gtk_label_set_text(label, "");
@@ -95,6 +98,7 @@ void send_equation(GtkButton *w, GtkEntry *entry)
 	gtk_entry_set_text(entry, text);
 }
 
+// Výpis výsledku do GtkLabel
 void label_equation(GtkButton *w, GtkLabel *label)
 {
 	gtk_label_set_text(label, text);

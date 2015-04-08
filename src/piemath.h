@@ -12,5 +12,6 @@ double piemathCbrt(double a);
 double piemathSquare(double a);
 double piemathPower(double a, int power);
 double piemathExp(double a);
+unsigned long long piemathFact(unsigned int a);
 
 #endif

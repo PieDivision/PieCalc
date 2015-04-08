@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.1 -->
+<!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
   <object class="GtkAboutDialog" id="aboutdialog1">
@@ -200,8 +200,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">3</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -219,8 +217,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">4</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -240,8 +236,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">0</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -258,8 +252,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -272,13 +264,11 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                             <property name="receives_default">True</property>
                             <property name="border_width">2</property>
                             <property name="resize_mode">queue</property>
-                            <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
+                            <signal name="clicked" handler="function_clicked" object="entry1" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">2</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                       </object>
@@ -311,8 +301,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">4</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -330,8 +318,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">0</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -349,8 +335,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">2</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -368,8 +352,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">3</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -387,8 +369,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                       </object>
@@ -420,8 +400,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -439,8 +417,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">2</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -458,8 +434,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">0</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -477,8 +451,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">3</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -496,8 +468,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">4</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                       </object>
@@ -529,8 +499,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -548,8 +516,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">2</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -567,8 +533,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">0</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -587,8 +551,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">3</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -607,8 +569,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">4</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                       </object>
@@ -639,8 +599,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">0</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -658,8 +616,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -678,8 +634,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">2</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -698,8 +652,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">3</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -718,8 +670,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">4</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                       </object>
@@ -751,8 +701,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">0</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -769,8 +717,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -787,8 +733,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                           <packing>
                             <property name="left_attach">2</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -808,7 +752,6 @@ Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</prop
                             <property name="left_attach">3</property>
                             <property name="top_attach">0</property>
                             <property name="width">2</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                       </object>

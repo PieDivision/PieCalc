@@ -48,3 +48,12 @@ double piemathPower(double a, int power){
 double piemathExp(double a){
 	return exp(a);
 }
+
+unsigned long long piemathFact(unsigned int a){
+	unsigned long long fact = 1;
+	for(; a>0; a--){
+		fact *= a;
+	}
+
+	return fact;
+}
