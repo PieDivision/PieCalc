@@ -95,8 +95,7 @@ void error(char *msg){
 /**
  * Function which converts internal string to double, only positive number are supported (minus is handled separately)
  *
- * @param expr Pointer to string
- * @param len Length of string
+ * @param expr String to convert
  * @return Returns expr converted to double
  */
 double n(string expr){
