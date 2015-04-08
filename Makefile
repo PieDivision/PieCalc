@@ -27,6 +27,6 @@ $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
 	mkdir -p $(BUILDDIR)
 	$(CC) $(CFLAGS) $(GTK) -c -o $@ $< $(LIBS)
 
-removeDirs:
+clean:
 	rm -rf build || true
 	rm -rf bin || true
