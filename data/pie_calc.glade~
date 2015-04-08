@@ -12,7 +12,7 @@ Usage: ...
 Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
     <property name="license_type">bsd</property>
     <child internal-child="vbox">
-      <object class="GtkBox" id="aboutdialog-vbox1">
+      <object class="GtkBox" id="aboutDialog">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>

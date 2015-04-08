@@ -4,15 +4,18 @@
   <requires lib="gtk+" version="3.10"/>
   <object class="GtkAboutDialog" id="aboutdialog1">
     <property name="can_focus">False</property>
+    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
+    <property name="has_resize_grip">False</property>
     <property name="program_name">PieCalc</property>
     <property name="version">1.0</property>
-    <property name="comments" translatable="yes">Easy-to-use calculator with basic functions. ...
-Usage: ...
-Authors: Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
+    <property name="comments" translatable="yes">Easy-to-use calculator with basic functions.
+
+Authors:
+Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
     <property name="license_type">bsd</property>
     <child internal-child="vbox">
-      <object class="GtkBox" id="aboutdialog-vbox1">
+      <object class="GtkBox" id="aboutDialog">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
