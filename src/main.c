@@ -9,6 +9,7 @@ char dynamicRes[1000];
 
 typedef struct{
 	GtkWidget *window;
+	GtkWidget *about;
 	GtkEntry *entry;
 	GtkLabel *label;
 } Gui;
@@ -26,6 +27,13 @@ Translate table[] = {
 	{"e^x", "e^"}
 };
 
+
+void show_about(GtkButton *w, Gui *gui)
+{
+	gtk_dialog_run(GTK_DIALOG(gui -> about));
+	gtk_widget_hide(gui -> about);
+}
+
 char *get_func(const char *text)
 {
 	for(unsigned int i = 0; i < sizeof(table) / sizeof(Translate); i++){
@@ -37,7 +45,7 @@ char *get_func(const char *text)
 }
 
 /**
- * @brief Function, which handles all numeric button - it can get the actual number from its label
+ * @brief Function, which handles all numeric buttons - it can get the actual number from its label
  * 
  * @param w Button which has sent the signal
  * @param entry The display of the calculator
@@ -117,7 +125,9 @@ int main(int argc, char *argv[])
 	gtk_builder_add_from_file(gtkBuilder, "pie_calc.glade", NULL);
 	
 	gui -> window = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "PieCalc"));
+	gui -> about = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "aboutDialog"));
 	gui -> entry = GTK_ENTRY(gtk_builder_get_object(gtkBuilder, "entry1"));
+
 	gui -> label = GTK_LABEL(gtk_builder_get_object(gtkBuilder, "label1"));
 
 	gtk_builder_connect_signals (gtkBuilder, gui);

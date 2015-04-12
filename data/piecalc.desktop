@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=pie_calc
+Exec=/home/beny/Dokumenty/Coding/IVS/repo/bin/
+Icon=/home/beny/Dokumenty/logo.png
+Type=Application
+Categories=GNOME;calculator;accessories;
