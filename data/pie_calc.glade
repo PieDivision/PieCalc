@@ -280,7 +280,7 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
                             <property name="receives_default">True</property>
                             <property name="border_width">2</property>
                             <property name="resize_mode">queue</property>
-                            <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
+                            <signal name="clicked" handler="function_clicked" object="entry1" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">2</property>
@@ -312,7 +312,7 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
                             <property name="border_width">2</property>
                             <property name="resize_mode">queue</property>
                             <property name="relief">half</property>
-                            <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
+                            <signal name="clicked" handler="function_clicked" object="entry1" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">4</property>
