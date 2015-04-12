@@ -45,7 +45,7 @@ char *get_func(const char *text)
 }
 
 /**
- * @brief Function, which handles all numeric button - it can get the actual number from its label
+ * @brief Function, which handles all numeric buttons - it can get the actual number from its label
  * 
  * @param w Button which has sent the signal
  * @param entry The display of the calculator
