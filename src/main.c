@@ -22,11 +22,13 @@ typedef struct{
 
 Translate table[] = {
 	{"RND", "rand()"},
-	{"√", "sqrt"},
-	{"x!", "!"},
-	{"x²", "^2"},
+	{"√", "sqrt("},
+	{"∛", "cbrt("},
+	{"log", "log("},
+	{"ln", "ln("},
 	{"e^x", "e^"},
-	{"∛", "cbrt("}
+	{"x²", "^2"},
+	{"x!", "!"}
 };
 
 char *get_func(const char *text)
