@@ -19,12 +19,15 @@ SOURCES := $(shell find $(SRC) -type f -name *.$(CODE))
 OBJ := $(patsubst $(SRC)/%, $(BUILDDIR)/%, $(SOURCES:.$(CODE)=.o)) 
 TARGET := bin/pie_calc
 
+all: dirs $(TARGET)
+
+dirs:
+	mkdir -p bin $(BUILDDIR)
+
 $(TARGET): $(OBJ)
-	mkdir -p bin
 	$(CC) $(CFLAGS) $(GTK) $^ -o $(TARGET) $(LIBS)
 
 $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
-	mkdir -p $(BUILDDIR)
 	$(CC) $(CFLAGS) $(GTK) -c -o $@ $< $(LIBS)
 
 clean:
