@@ -1,6 +1,7 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <string.h>
+#include <locale.h>
 
 #include "piesolve.h"
 
@@ -28,13 +29,6 @@ Translate table[] = {
 	{"∛", "cbrt("}
 };
 
-
-void show_about(GtkButton *w, Gui *gui)
-{
-	gtk_dialog_run(GTK_DIALOG(gui -> about));
-	gtk_widget_hide(gui -> about);
-}
-
 char *get_func(const char *text)
 {
 	for(unsigned int i = 0; i < sizeof(table) / sizeof(Translate); i++){
@@ -44,6 +38,21 @@ char *get_func(const char *text)
 
 	return NULL;
 }
+
+// Přeložení textu tlačítek na funkce
+void function_clicked(GtkButton *w, GtkEntry *entry)
+{
+	strcpy(text, gtk_entry_get_text(entry));
+	strcat(text, get_func(gtk_button_get_label(w)));
+	gtk_entry_set_text(entry, text);
+}
+
+void show_about(GtkButton *w, Gui *gui)
+{
+	gtk_dialog_run(GTK_DIALOG(gui -> about));
+	gtk_widget_hide(gui -> about);
+}
+
 
 /**
  * @brief Function, which handles all numeric buttons - it can get the actual number from its label
@@ -72,14 +81,6 @@ void arith_button_clicked(GtkButton *w, GtkEntry *entry)
 	gtk_entry_set_text(entry, text);
 }
 
-// Přeložení textu tlačítek na funkce
-void function_clicked(GtkButton *w, GtkEntry *entry)
-{
-	strcpy(text, gtk_entry_get_text(entry));
-	strcat(text, get_func(gtk_button_get_label(w)));
-	gtk_entry_set_text(entry, text);
-}
-
 // Smaže poslední znak na obrazovce
 void delete_one(GtkButton *w, GtkEntry *entry)
 {
@@ -103,6 +104,7 @@ void clear_label(GtkButton *w, GtkLabel *label)
 // Odeslání rovnice a výpis výsledku
 void send_equation(GtkButton *w, GtkEntry *entry)
 {
+	setlocale(LC_NUMERIC, "en_US.UTF-8");
 	sprintf(text, "%.2f", pieSolver( (char *)gtk_entry_get_text(entry) ));
 	gtk_entry_set_text(entry, text);
 }
