@@ -146,6 +146,18 @@ G_MODULE_EXPORT void label_equation(GtkButton *w, GtkLabel *label)
 	gtk_label_set_text(label, text);
 }
 
+/**
+ * Method which takes signal from quit button in help dialog and inform the parent to hide the dialog
+ * 
+ * @param w The button which sended the signal
+ * @param d The dialog which should be close
+ */
+G_MODULE_EXPORT void quitHelp(GtkButton *w, GtkDialog *d)
+{
+	(void)w;
+	gtk_dialog_response(d, 1);
+}
+
 int main(int argc, char *argv[])
 {
 
