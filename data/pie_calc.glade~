@@ -4,6 +4,8 @@
   <requires lib="gtk+" version="3.10"/>
   <object class="GtkAboutDialog" id="aboutDialog">
     <property name="can_focus">False</property>
+    <property name="margin_top">1</property>
+    <property name="margin_bottom">1</property>
     <property name="resizable">False</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
@@ -16,7 +18,7 @@ Authors:
 Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
     <property name="authors">Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
     <property name="logo_icon_name">image-missing</property>
-    <property name="license_type">bsd</property>
+    <property name="license_type">gpl-3-0</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="aboutDialog1">
         <property name="can_focus">False</property>
@@ -42,6 +44,90 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
         </child>
         <child>
           <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="helpDialog">
+    <property name="can_focus">False</property>
+    <property name="type">popup</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox1">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area1">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="label2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Help</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label3">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">PieCalc is an extremely easy-to-use calculator!
+
+All you need to know is:
+- mathematical syntax
+- how to click the buttons
+
+So what are you waiting for?
+Just click the buttons so that it is mathematically correct
+and see the result immediately below the main text box.
+Never mind if you do something wrong, the backspace button
+will always save you.
+And when you want to delete everything, just hit the CE button
+and you can start again!
+
+Happy PieCalculating!</property>
+                <property name="ellipsize">middle</property>
+                <property name="angle">0.01</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
         </child>
       </object>
     </child>
@@ -94,6 +180,15 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
+                          <object class="GtkImageMenuItem" id="imagemenuitem3">
+                            <property name="label">Help</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="image">image3</property>
+                            <property name="use_stock">False</property>
+                          </object>
+                        </child>
+                        <child>
                           <object class="GtkImageMenuItem" id="imagemenuitem1">
                             <property name="label">About</property>
                             <property name="visible">True</property>
@@ -144,6 +239,8 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
                     <property name="width_request">250</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_left">10</property>
+                    <property name="margin_right">10</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkEntry" id="entry1">
@@ -189,6 +286,9 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">center</property>
+                    <property name="margin_left">10</property>
+                    <property name="margin_right">10</property>
+                    <property name="margin_bottom">15</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">1</property>
                     <child>
@@ -245,7 +345,7 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
                             <property name="margin_bottom">1</property>
                             <property name="border_width">2</property>
                             <property name="resize_mode">queue</property>
-                            <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
+                            <signal name="clicked" handler="function_clicked" object="entry1" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -261,7 +361,7 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="border_width">2</property>
-                            <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
+                            <signal name="clicked" handler="function_clicked" object="entry1" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -278,7 +378,7 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
                             <property name="receives_default">True</property>
                             <property name="border_width">2</property>
                             <property name="resize_mode">queue</property>
-                            <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
+                            <signal name="clicked" handler="function_clicked" object="entry1" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">2</property>
@@ -310,7 +410,7 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
                             <property name="border_width">2</property>
                             <property name="resize_mode">queue</property>
                             <property name="relief">half</property>
-                            <signal name="clicked" handler="numeric_button_clicked" object="entry1" swapped="no"/>
+                            <signal name="clicked" handler="function_clicked" object="entry1" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">4</property>
@@ -798,5 +898,10 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkImage" id="image3">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-missing-image</property>
   </object>
 </interface>
