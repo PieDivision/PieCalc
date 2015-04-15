@@ -115,7 +115,6 @@ G_MODULE_EXPORT void clear_label(GtkButton *w, GtkLabel *label)
 G_MODULE_EXPORT void send_equation(GtkButton *w, GtkEntry *entry)
 {
 	(void)w;
-	setlocale(LC_NUMERIC, "en_US.UTF-8");
 	sprintf(text, "%.2f", pieSolver( (char *)gtk_entry_get_text(entry) ));
 	gtk_entry_set_text(entry, text);
 }
@@ -129,6 +128,7 @@ G_MODULE_EXPORT void label_equation(GtkButton *w, GtkLabel *label)
 
 int main(int argc, char *argv[])
 {
+
 	GtkBuilder *gtkBuilder;
 	Gui *gui;
 
@@ -154,6 +154,9 @@ int main(int argc, char *argv[])
 	g_signal_connect(gui -> window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
 	gtk_widget_show(gui -> window);
+
+	// Set locale to English - we like decimal point more than decimal comma
+	setlocale(LC_NUMERIC, "en_US.UTF-8");
 
 	gtk_main();
 
