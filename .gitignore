@@ -1,3 +1,3 @@
 build
 bin
-*.glade~
+data/pie_calc.glade~
