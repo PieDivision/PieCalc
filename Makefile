@@ -8,7 +8,7 @@ ifndef CC
 	CC := gcc
 endif
 
-CFLAGS := -std=c99 -Wextra -pedantic -g 
+CFLAGS := -std=c99 -Wextra -pedantic -g
 LIBS := -lm
 GTK := -export-dynamic `pkg-config --cflags --libs gtk+-3.0`
 
@@ -25,10 +25,10 @@ dirs:
 	mkdir -p bin $(BUILDDIR)
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $(GTK) $^ -o $(TARGET) $(LIBS)
+	$(CC) $(CFLAGS) $^ -o $(TARGET) $(LIBS) $(GTK)
 
 $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
-	$(CC) $(CFLAGS) $(GTK) -c -o $@ $< $(LIBS)
+	$(CC) $(CFLAGS) -c -o $@ $< $(LIBS) $(GTK)
 
 clean:
 	rm -rf build || true
