@@ -8,6 +8,7 @@
 #include "piemath.h"
 
 char error[1000] = "";
+char buffer[1000] = "";
 
 typedef struct {
 	char *p;
@@ -273,27 +274,41 @@ double solve_plus(string expr){
 	return solve_plus(l) + solve_plus(r);
 }
 
-bool checkBrackets(char *expr){
+char *checkBrackets(char *expr){
 	int brackets = 0;
-	while(*expr){
-		if(*expr == '(') brackets++;
-		else if(*expr == ')'){
+
+	char *p = expr;
+
+	while(*p){
+		if(*p == '(') brackets++;
+		else if(*p == ')'){
 			brackets--;
-			if(brackets < 0) return false;
+			if(brackets < 0) return NULL;
 		}
-		expr++;
+		p++;
 	}
 
-	return true;
+	if(brackets == 0){
+		return expr;
+	}
+
+	strcpy(buffer, expr);
+	for(int i = 0; i < brackets; i++){
+		strcat(buffer, ")");
+	}
+
+	return buffer;
 }
 
 double pieSolver(char *expr){
-	if(!checkBrackets(expr)){
+	char *edited = checkBrackets(expr);
+
+	if(edited == NULL){
 		strcpy(error, "Bracket error!");
 		return NAN;
 	}
 
-	return solve_plus((string){expr, strlen(expr)});
+	return solve_plus((string){edited, strlen(edited)});
 }
 
 char *getError(){
