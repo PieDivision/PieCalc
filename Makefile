@@ -4,13 +4,18 @@
 # TODO: Solve dependencies
 #
 
+ifeq ($(platform),win32)
+	CC := i686-w64-mingw32-gcc
+	export PKG_CONFIG_PATH=../gtk/lib/pkgconfig
+endif
+
 ifndef CC
 	CC := gcc
 endif
 
 CFLAGS := -std=c99 -Wextra -pedantic -g
 LIBS := -lm
-GTK := -export-dynamic `pkg-config --cflags --libs gtk+-win32-3.0`
+GTK := -export-dynamic `pkg-config --cflags --libs gtk+-3.0`
 
 CODE := c
 SRC := src

@@ -1,6 +1,0 @@
-#!/bin/sh
-
-export PKG_CONFIG_PATH=../gtk/lib/pkgconfig
-pkg-config --cflags --libs gtk+-3.0
-make CC=i686-w64-mingw32-gcc
-#cp bin/pie_calc ~/shared/pie_calc.exe
