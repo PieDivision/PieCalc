@@ -30,6 +30,9 @@ $(TARGET): $(OBJ)
 $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
 	$(CC) $(CFLAGS) $(GTK) -c -o $@ $< $(LIBS)
 
+pack:
+	tar --exclude='run' --exclude='plan' --exclude='bin' --exclude='build' -pczf piecalc-1.0.tar.gz *
+
 clean:
 	rm -rf build || true
 	rm -rf bin || true
