@@ -11,6 +11,7 @@ char dynamicRes[1000];
 typedef struct{
 	GtkWidget *window;
 	GtkWidget *about;
+	GtkWidget *help;
 	GtkEntry *entry;
 	GtkLabel *label;
 } Gui;
@@ -50,11 +51,30 @@ G_MODULE_EXPORT void function_clicked(GtkButton *w, GtkEntry *entry)
 	gtk_entry_set_text(entry, text);
 }
 
+/**
+ * @brief Function that shows the aboutDialog
+ * 
+ * @param w Button which has sent the signal
+ * @param gui Structure with the declaration of GtkWidget *about
+ */
 G_MODULE_EXPORT void show_about(GtkButton *w, Gui *gui)
 {
 	(void)w;
 	gtk_dialog_run(GTK_DIALOG(gui -> about));
 	gtk_widget_hide(gui -> about);
+}
+
+/**
+ * @brief Function that shows the helpDialog
+ * 
+ * @param w Button which has sent the signal
+ * @param gui Structure with the declaration of GtkWidget *help
+ */
+G_MODULE_EXPORT void show_help(GtkButton *w, Gui *gui)
+{
+	(void)w;
+	gtk_dialog_run(GTK_DIALOG(gui -> help));
+	gtk_widget_hide(gui -> help);
 }
 
 
@@ -143,6 +163,7 @@ int main(int argc, char *argv[])
 	
 	gui -> window = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "PieCalc"));
 	gui -> about = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "aboutDialog"));
+	gui -> help = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "helpDialog"));
 	gui -> entry = GTK_ENTRY(gtk_builder_get_object(gtkBuilder, "entry1"));
 
 	gui -> label = GTK_LABEL(gtk_builder_get_object(gtkBuilder, "label1"));
