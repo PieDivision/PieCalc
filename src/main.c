@@ -119,48 +119,31 @@ G_MODULE_EXPORT void label_equation(GtkButton *w, GtkLabel *label)
 
 int main(int argc, char *argv[])
 {
-	int counter = 0;
-	fprintf(stderr, "%d\n", counter++);  //0
 	GtkBuilder *gtkBuilder;
 	Gui *gui;
 
 	gui = g_slice_new(Gui);
 
-	fprintf(stderr, "%d\n", counter++);  //1
 	gtk_init(&argc, &argv);
-	fprintf(stderr, "%d\n", counter++);  //2
 
 	gtkBuilder = gtk_builder_new();
-	fprintf(stderr, "%d\n", counter++);  //3
 	GError *err = NULL;
-	printf("%d\n",gtk_builder_add_from_file(gtkBuilder, "pie_calc.glade", &err));
-	//printf("%s", err->message);
+	gtk_builder_add_from_file(gtkBuilder, "pie_calc.glade", &err);
 
-	fprintf(stderr, "%d\n", counter++); //4
 	
 	gui -> window = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "PieCalc"));
 	gui -> about = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "aboutDialog"));
 	gui -> entry = GTK_ENTRY(gtk_builder_get_object(gtkBuilder, "entry1"));
-	fprintf(stderr, "%d\n", counter++);//5
 
 	gui -> label = GTK_LABEL(gtk_builder_get_object(gtkBuilder, "label1"));
-	fprintf(stderr, "%d\n", counter++);//6
 
 	gtk_builder_connect_signals (gtkBuilder, gui);
-	fprintf(stderr, "%d\n", counter++);//7
 
 	g_object_unref(G_OBJECT(gtkBuilder));
-	fprintf(stderr, "%d\n", counter++);//8
-
-	fprintf(stderr, "%p\n", gui->window);
-	fprintf(stderr, "%p\n", gui->about);
-	fprintf(stderr, "%p\n", gui->entry);
 
 	g_signal_connect(gui -> window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-	fprintf(stderr, "%d\n", counter++);//9
 
 	gtk_widget_show(gui -> window);
-	fprintf(stderr, "%d\n", counter++);//10
 
 	gtk_main();
 
