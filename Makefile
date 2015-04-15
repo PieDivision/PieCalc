@@ -10,7 +10,7 @@ endif
 
 CFLAGS := -std=c99 -Wextra -pedantic -g
 LIBS := -lm
-GTK := -export-dynamic `pkg-config --cflags --libs gtk+-3.0`
+GTK := -export-dynamic `pkg-config --cflags --libs gtk+-win32-3.0`
 
 CODE := c
 SRC := src
