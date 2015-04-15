@@ -72,5 +72,7 @@ int main()
 	assert_equal("Power", piemathPower(2, 5), 32);
 	assert_equal("Exponential", piemathExp(4), exp(4));
 
+	assert_equal("Factorial", piemathFact(5), 120);
+
 	return success ? EXIT_SUCCESS : EXIT_FAILURE;
 }*/
