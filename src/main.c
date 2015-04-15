@@ -44,6 +44,7 @@ char *get_func(const char *text)
 // Přeložení textu tlačítek na funkce
 G_MODULE_EXPORT void function_clicked(GtkButton *w, GtkEntry *entry)
 {
+	(void)w;
 	strcpy(text, gtk_entry_get_text(entry));
 	strcat(text, get_func(gtk_button_get_label(w)));
 	gtk_entry_set_text(entry, text);
@@ -51,6 +52,7 @@ G_MODULE_EXPORT void function_clicked(GtkButton *w, GtkEntry *entry)
 
 G_MODULE_EXPORT void show_about(GtkButton *w, Gui *gui)
 {
+	(void)w;
 	gtk_dialog_run(GTK_DIALOG(gui -> about));
 	gtk_widget_hide(gui -> about);
 }
@@ -64,6 +66,7 @@ G_MODULE_EXPORT void show_about(GtkButton *w, Gui *gui)
  */
 G_MODULE_EXPORT void numeric_button_clicked(GtkButton *w, GtkEntry *entry)
 {
+	(void)w;
 	strcpy(text, gtk_entry_get_text(entry));
 	strcat(text, gtk_button_get_label(w));
 	gtk_entry_set_text(entry, text);
@@ -72,11 +75,13 @@ G_MODULE_EXPORT void numeric_button_clicked(GtkButton *w, GtkEntry *entry)
 // Dynamický výpis výsledku do GtkLabel
 G_MODULE_EXPORT void dynamic_result(GtkButton *w, GtkLabel *label)
 {
+	(void)w;
 	gtk_label_set_text(label, dynamicRes);
 }
 
 G_MODULE_EXPORT void arith_button_clicked(GtkButton *w, GtkEntry *entry)
 {
+	(void)w;
 	sprintf(dynamicRes, "%.2f", pieSolver((char *)gtk_entry_get_text(entry)));
 	strcpy(text, gtk_entry_get_text(entry));
 	strcat(text, gtk_button_get_label(w));
@@ -86,6 +91,7 @@ G_MODULE_EXPORT void arith_button_clicked(GtkButton *w, GtkEntry *entry)
 // Smaže poslední znak na obrazovce
 G_MODULE_EXPORT void delete_one(GtkButton *w, GtkEntry *entry)
 {
+	(void)w;
 	strcpy(text, gtk_entry_get_text(entry));
 	text[strlen(text) - 1] = 0;
 	gtk_entry_set_text(entry, text);
@@ -94,18 +100,21 @@ G_MODULE_EXPORT void delete_one(GtkButton *w, GtkEntry *entry)
 // Vymazání textového okna
 G_MODULE_EXPORT void clear_clicked(GtkButton *w, GtkEntry *entry)
 {
+	(void)w;
 	gtk_entry_set_text(entry, "");
 }
 
 // Vymazání GtkLabel
 G_MODULE_EXPORT void clear_label(GtkButton *w, GtkLabel *label)
 {
+	(void)w;
 	gtk_label_set_text(label, "");
 }
 
 // Odeslání rovnice a výpis výsledku
 G_MODULE_EXPORT void send_equation(GtkButton *w, GtkEntry *entry)
 {
+	(void)w;
 	setlocale(LC_NUMERIC, "en_US.UTF-8");
 	sprintf(text, "%.2f", pieSolver( (char *)gtk_entry_get_text(entry) ));
 	gtk_entry_set_text(entry, text);
@@ -114,6 +123,7 @@ G_MODULE_EXPORT void send_equation(GtkButton *w, GtkEntry *entry)
 // Výpis výsledku do GtkLabel
 G_MODULE_EXPORT void label_equation(GtkButton *w, GtkLabel *label)
 {
+	(void)w;
 	gtk_label_set_text(label, text);
 }
 
