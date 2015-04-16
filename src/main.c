@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#include <math.h>
 
 /// Our awesome lib
 #include "piesolve.h"
@@ -87,23 +88,34 @@ G_MODULE_EXPORT void editable_result(GtkEntry *entry, GtkLabel *label)
 	memset(&dynamicRes[0], 0, sizeof(dynamicRes)); 
 	memset(&text[0], 0, sizeof(text)); // Clear arrays
 	
-	strcpy(dynamicRes, gtk_entry_get_text(entry));
+	strcpy(dynamicRes, gtk_entry_get_text(entry)); // Load text entry into dynamicRes
+	
 	if(strlen(dynamicRes) != 0){	// Proceed only if text entry isn't empty because of SIGSEGV
-		strncpy(text, dynamicRes, strlen(dynamicRes) - 1);
-		
+		strncpy(text, dynamicRes, strlen(dynamicRes) - 1); // Copy string without last character
+
 		// Read last character of equation
 		char c = dynamicRes[strlen(dynamicRes) - 1];
+		
+		sprintf(dynamicRes, "%.2f", pieSolver((char *)text));
 	
 		// if last character of equation is arithmetic operatin make dynamic result
-		if(c == '+' || c == '-' || c == '*' || c == '/'){
-			sprintf(dynamicRes, "%.2f", pieSolver((char *)text));
-			gtk_label_set_text(label, dynamicRes);
+		if(c == '+' || c == '-' || c == '*' || c == '/' || c == ')'){
+			if(isnan(pieSolver((char *)text))){
+				gtk_label_set_text(label, getError());
+			}
+			else{
+				gtk_label_set_text(label, dynamicRes);
+			}
 		}
 		// If last character is equal to equal print final solution
 		else if(c == '='){
-			sprintf(dynamicRes, "%.2f", pieSolver((char *)text));
-			gtk_label_set_text(label, dynamicRes);
-			gtk_entry_set_text(entry, dynamicRes);
+			if(isnan(pieSolver((char *) text))){
+				gtk_label_set_text(label, getError());
+			}
+			else{
+				gtk_label_set_text(label, dynamicRes);
+				gtk_entry_set_text(entry, dynamicRes);	
+			}
 		}
 	}
 	else
