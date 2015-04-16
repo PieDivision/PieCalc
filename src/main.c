@@ -2,7 +2,7 @@
  * @file main.c
  * @brief Main source. GTK control.
  * @author David Benes, Stepanka Barotova
-**/
+ */
 
 #include <gtk/gtk.h>
 #include <stdio.h>
@@ -49,7 +49,7 @@ Translate table[] = {
  *
  * @param[text] text of gtk button label which could be translated
  * @return Rutine returns translated text or unchanged text if couldn't be translated
-**/
+ */
 char *get_func(char *text)
 {
 	for(unsigned int i = 0; i < sizeof(table) / sizeof(Translate); i++){
@@ -77,9 +77,11 @@ G_MODULE_EXPORT void numeric_button_clicked(GtkButton *w, GtkEntry *entry)
 /**
  * @brief This rutine control everything what happens in text entry and hadle it
  *
+ * @todo Edit dynamic result for end bracket
+ *
  * @param[entry] Main editable display of piecalc
  * @param[label] Secondary display of piecal which shows dynamic result or error in equation
-**/
+ */
 G_MODULE_EXPORT void editable_result(GtkEntry *entry, GtkLabel *label)
 {
 	memset(&dynamicRes[0], 0, sizeof(dynamicRes)); 
@@ -106,14 +108,14 @@ G_MODULE_EXPORT void editable_result(GtkEntry *entry, GtkLabel *label)
 	}
 	else
 		gtk_label_set_text(label, ""); // If text entry is empty, clear label too
-} 
+} /// End of rutine editable_result
 
 /**
  * @brief Delete last character of text entry (eqation)
  *
  * @param[w] Button which has sent a signal
  * @param[entry] Display of the calculator
-**/
+ */
 G_MODULE_EXPORT void delete_one(GtkButton *w, GtkEntry *entry)
 {
 	(void)w; // This is necessary because of -Wall argument of gcc
@@ -127,7 +129,7 @@ G_MODULE_EXPORT void delete_one(GtkButton *w, GtkEntry *entry)
  *
  * @param[w] Button whis has sent a signal
  * @param[entry] Display of the calculator which has to be cleared
-**/
+ */
 G_MODULE_EXPORT void clear_clicked(GtkButton *w, GtkEntry *entry)
 {
 	(void)w;
@@ -210,3 +212,4 @@ int main(int argc, char *argv[])
 
 	return EXIT_SUCCESS;
 } // End of rutine main
+/*** End of file ***/
