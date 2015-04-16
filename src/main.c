@@ -86,7 +86,7 @@ G_MODULE_EXPORT void delete_one(GtkButton *w, GtkEntry *entry)
 {
 	(void)w;
 	strcpy(text, gtk_entry_get_text(entry));
-	text[strle  n(text) - 1] = 0;
+	text[strlen(text) - 1] = 0;
 	gtk_entry_set_text(entry, text);
 }
 
