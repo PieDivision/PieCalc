@@ -274,7 +274,6 @@ Happy PieCalculating!</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">baseline</property>
-                        <property name="editable">False</property>
                         <property name="xalign">0.0099999997764825821</property>
                         <property name="caps_lock_warning">False</property>
                       </object>
