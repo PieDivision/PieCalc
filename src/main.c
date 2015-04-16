@@ -5,8 +5,8 @@
 
 #include "piesolve.h"
 
-char text[1000];
-char dynamicRes[1000];
+char text[1000] = "";
+char dynamicRes[1000] = "";
 
 typedef struct{
 	GtkWidget *window;
@@ -32,23 +32,71 @@ Translate table[] = {
 	{"x!", "!"}
 };
 
-char *get_func(const char *text)
+char *get_func(char *text)
 {
 	for(unsigned int i = 0; i < sizeof(table) / sizeof(Translate); i++){
 		if(strcmp(text, table[i].btn) == 0)
 			return table[i].function;
 	}
 
-	return NULL;
+	return text;
 }
 
-// Přeložení textu tlačítek na funkce
-G_MODULE_EXPORT void function_clicked(GtkButton *w, GtkEntry *entry)
+/**
+ * @brief Function, which handles all numeric buttons - it can get the actual number from its label
+ * 
+ * @param w Button which has sent the signal
+ * @param entry The display of the calculator
+ */
+G_MODULE_EXPORT void numeric_button_clicked(GtkButton *w, GtkEntry *entry)
+{
+	strcpy(text, gtk_entry_get_text(entry));
+	strcat(text, get_func((char *)gtk_button_get_label(w)));
+	gtk_entry_set_text(entry, text);
+}
+
+// Dynamický výpis do GtkLabel from editable entry
+G_MODULE_EXPORT void editable_result(GtkEntry *entry, GtkLabel *label)
+{
+	memset(&dynamicRes[0], 0, sizeof(dynamicRes));
+	memset(&text[0], 0, sizeof(text));
+	
+	strcpy(dynamicRes, gtk_entry_get_text(entry));
+	if(strlen(dynamicRes) != 0){
+		strncpy(text, dynamicRes, strlen(dynamicRes) - 1);
+		
+		char c = dynamicRes[strlen(dynamicRes) - 1];
+	
+		if(c == '+' || c == '-' || c == '*' || c == '/'){
+			sprintf(dynamicRes, "%.2f", pieSolver((char *)text));
+			gtk_label_set_text(label, dynamicRes);
+		}
+		else if(c == '='){
+			sprintf(dynamicRes, "%.2f", pieSolver((char *)text));
+			gtk_label_set_text(label, dynamicRes);
+			gtk_entry_set_text(entry, dynamicRes);
+		}
+	}
+	else
+		gtk_label_set_text(label, "");
+}
+
+// Smaže poslední znak na obrazovce
+G_MODULE_EXPORT void delete_one(GtkButton *w, GtkEntry *entry)
 {
 	(void)w;
 	strcpy(text, gtk_entry_get_text(entry));
-	strcat(text, get_func(gtk_button_get_label(w)));
+	text[strle  n(text) - 1] = 0;
 	gtk_entry_set_text(entry, text);
+}
+
+// Vymazání textového okna
+G_MODULE_EXPORT void clear_clicked(GtkButton *w, GtkEntry *entry)
+{
+	(void)w;
+	memset(&dynamicRes[0], 0, sizeof(dynamicRes));
+	memset(&text[0], 0, sizeof(text));
+	gtk_entry_set_text(entry, "");
 }
 
 /**
@@ -75,75 +123,6 @@ G_MODULE_EXPORT void show_help(GtkButton *w, Gui *gui)
 	(void)w;
 	gtk_dialog_run(GTK_DIALOG(gui -> help));
 	gtk_widget_hide(gui -> help);
-}
-
-
-/**
- * @brief Function, which handles all numeric buttons - it can get the actual number from its label
- * 
- * @param w Button which has sent the signal
- * @param entry The display of the calculator
- */
-G_MODULE_EXPORT void numeric_button_clicked(GtkButton *w, GtkEntry *entry)
-{
-	(void)w;
-	strcpy(text, gtk_entry_get_text(entry));
-	strcat(text, gtk_button_get_label(w));
-	gtk_entry_set_text(entry, text);
-}
-
-// Dynamický výpis výsledku do GtkLabel
-G_MODULE_EXPORT void dynamic_result(GtkButton *w, GtkLabel *label)
-{
-	(void)w;
-	gtk_label_set_text(label, dynamicRes);
-}
-
-G_MODULE_EXPORT void arith_button_clicked(GtkButton *w, GtkEntry *entry)
-{
-	(void)w;
-	sprintf(dynamicRes, "%.2f", pieSolver((char *)gtk_entry_get_text(entry)));
-	strcpy(text, gtk_entry_get_text(entry));
-	strcat(text, gtk_button_get_label(w));
-	gtk_entry_set_text(entry, text);
-}
-
-// Smaže poslední znak na obrazovce
-G_MODULE_EXPORT void delete_one(GtkButton *w, GtkEntry *entry)
-{
-	(void)w;
-	strcpy(text, gtk_entry_get_text(entry));
-	text[strlen(text) - 1] = 0;
-	gtk_entry_set_text(entry, text);
-}
-
-// Vymazání textového okna
-G_MODULE_EXPORT void clear_clicked(GtkButton *w, GtkEntry *entry)
-{
-	(void)w;
-	gtk_entry_set_text(entry, "");
-}
-
-// Vymazání GtkLabel
-G_MODULE_EXPORT void clear_label(GtkButton *w, GtkLabel *label)
-{
-	(void)w;
-	gtk_label_set_text(label, "");
-}
-
-// Odeslání rovnice a výpis výsledku
-G_MODULE_EXPORT void send_equation(GtkButton *w, GtkEntry *entry)
-{
-	(void)w;
-	sprintf(text, "%.2f", pieSolver( (char *)gtk_entry_get_text(entry) ));
-	gtk_entry_set_text(entry, text);
-}
-
-// Výpis výsledku do GtkLabel
-G_MODULE_EXPORT void label_equation(GtkButton *w, GtkLabel *label)
-{
-	(void)w;
-	gtk_label_set_text(label, text);
 }
 
 /**
@@ -176,9 +155,8 @@ int main(int argc, char *argv[])
 	gui -> window = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "PieCalc"));
 	gui -> about = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "aboutDialog"));
 	gui -> help = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "helpDialog"));
-	gui -> entry = GTK_ENTRY(gtk_builder_get_object(gtkBuilder, "entry1"));
-
-	gui -> label = GTK_LABEL(gtk_builder_get_object(gtkBuilder, "label1"));
+	// gui -> entry = GTK_ENTRY(gtk_builder_get_object(gtkBuilder, "entry1"));
+	// gui -> label = GTK_LABEL(gtk_builder_get_object(gtkBuilder, "label1"));
 
 	gtk_builder_connect_signals (gtkBuilder, gui);
 
