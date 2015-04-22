@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=PieCalc
+Exec=/opt/pie_calc/pie_calc
+Icon=/opt/pie_calc/icon/icon_256x256.png
+Type=Application
+Categories=GNOME;GTK;accessories;office;
