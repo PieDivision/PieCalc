@@ -39,5 +39,4 @@ pack:
 	tar --exclude='run' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
 
 clean:
-	rm -rf $(BUILDDIR) || true
-	rm -rf $(BINDIR) || true
+	rm -rf $(BUILDDIR) $(BINDIR) doc || true
