@@ -4,14 +4,17 @@
 
 CC = gcc
 CFLAGS = -std=c99 -Wall -Wextra -pedantic
+LIBRARIES = -lm
 
 SRC=../src
 OBJ=piemath_tests.o piemath.o
 
-all: pietests.exe
+all: pietests
+	./pietests
+	rm pietests
 
-pietests.exe: $(OBJ) $(SRC)/piemath.h
-	$(CC) $(CFLAGS) $(OBJ) -o $@
+pietests: $(OBJ) $(SRC)/piemath.h
+	$(CC) $(LIBRARIES) $(OBJ) -o $@
 
 piemath_tests.o: piemath_tests.c
 	$(CC) $(CFLAGS) -c $<

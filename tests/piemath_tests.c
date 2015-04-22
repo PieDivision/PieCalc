@@ -29,7 +29,8 @@ void print_failure(char *text)
 
 void assert_equal(char *text, double pievalue, double correctvalue)
 {
-	if(pievalue == correctvalue)
+
+	if((isnan(pievalue) && isnan(pievalue)) || fabs(pievalue - correctvalue) < 1e-10)
 	{
 		print_success(text);
 		ok++;
@@ -63,14 +64,14 @@ int main()
 	assert_equal("Natural logarithm", piemathLn(3), log(3));
 	assert_equal("Natural logarithm - NAN test", piemathLn(0), NAN);
 
-	assert_equal("Logarithm 10", pieMathLog(1000), log10(1000));
-	assert_equal("Logarithm 10 - NAN test", pieMathLog(-1), NAN);
+	assert_equal("Logarithm 10", piemathLog(1000), log10(1000));
+	assert_equal("Logarithm 10 - NAN test", piemathLog(-1), NAN);
 
 	assert_equal("Integer square root", piemathSqrt(25), 5);
 	assert_equal("Double square root", piemathSqrt(213), sqrt(213));
 	assert_equal("Square root - NAN test", piemathSqrt(-5), NAN);
 
-	assert_equal("Integer cubic root", piemathCbrt(27), 3);
+	assert_equal("Integer cubic root", piemathCbrt(27), cbrt(27.0));
 	assert_equal("Double cubic root", piemathCbrt(45.5), cbrt(45.5));
 
 	assert_equal("Square", piemathSquare(4), 16);
