@@ -99,6 +99,10 @@ double n(string expr){
 	bool beforePoint = true;
 	double division = 0.1;
 
+	if(expr.len == 1 && *(expr.p) == 'e'){
+		return piemathE();
+	}
+
 	for(size_t i = 0; i < expr.len; i++){
 		if(*(expr.p) == '.'){
 			if(!beforePoint){

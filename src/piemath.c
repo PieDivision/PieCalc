@@ -2,6 +2,10 @@
 
 #include "piemath.h"
 
+#ifndef M_E
+#define M_E 2.7182818284590452354
+#endif
+
 double piemathAdd(double a, double b){
 	return a + b;
 }
@@ -24,7 +28,7 @@ double piemathLn(double a){
 	}
 	return log(a);
 }
-double pieMathLog(double a){
+double piemathLog(double a){
 	if(a <= 0){
 		return NAN;
 	}
@@ -56,4 +60,8 @@ unsigned long long piemathFact(unsigned int a){
 	}
 
 	return fact;
+}
+
+double piemathE(){
+	return M_E;
 }
