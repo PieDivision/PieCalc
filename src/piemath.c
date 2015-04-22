@@ -1,6 +1,11 @@
 #include <math.h>
+#include <stdbool.h>
+#include <time.h>
+#include <stdlib.h>
 
 #include "piemath.h"
+
+bool randInitialized = false;
 
 #ifndef M_E
 #define M_E 2.7182818284590452354
@@ -64,4 +69,13 @@ unsigned long long piemathFact(unsigned int a){
 
 double piemathE(){
 	return M_E;
+}
+
+double piemathRand(){
+	if(!randInitialized){
+		srand(time(0));
+		randInitialized = true;
+	}
+
+	return ((double)rand()) / RAND_MAX;
 }

@@ -14,5 +14,6 @@ double piemathPower(double a, int power);
 double piemathExp(double a);
 unsigned long long piemathFact(unsigned int a);
 double piemathE();
+double piemathRand();
 
 #endif

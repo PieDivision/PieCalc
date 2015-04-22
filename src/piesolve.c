@@ -55,7 +55,8 @@ function functions[] = {
 	{"log", log10},
 	{"ln", log},
 	{"cbrt", cbrt},
-	{"exp", exp}
+	{"exp", exp},
+	{"rand", piemathRand}
 };
 
 bool cmp(function *f, string expr){
