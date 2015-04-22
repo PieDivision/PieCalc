@@ -9,9 +9,12 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "piemath.h"
+#include "../src/piemath.h"
+#include "../src/piesolve.h"
 
 bool success = true;
+int ok = 0;
+int failed = 0;
 
 
 void print_success(char *text)
@@ -24,24 +27,26 @@ void print_failure(char *text)
 	printf("Test FAILED: %s\n", text);
 }
 
-bool assert_equal(char *text, double pievalue, double correctvalue)
+void assert_equal(char *text, double pievalue, double correctvalue)
 {
 	if(pievalue == correctvalue)
 	{
-		print_success;
+		print_success(text);
+		ok++;
 	}
 	else
 	{
-		print_failure;
+		print_failure(text);
 		success = false;
+		failed++;
 	}
 }
-/*
+
 int main()
 {
-	printf("*************************\n");
-	printf("Testing piemath.h...");
-	printf("*************************\n");
+	printf("*****************************************\n");
+	printf("Testing piemath.h...\n");
+	printf("*****************************************\n");
 
 	assert_equal("Addition", piemathAdd(4, 2), 6);
 
@@ -74,5 +79,14 @@ int main()
 
 	assert_equal("Factorial", piemathFact(5), 120);
 
+	printf("*****************************************\n");
+	printf("Testing piesolve.h...\n");
+	printf("*****************************************\n");
+
+	printf("*****************************************\n");
+	printf("%d tests, OK %d, failed %d\n", (ok+failed), ok, failed);
+	printf("*****************************************\n");
+
+
 	return success ? EXIT_SUCCESS : EXIT_FAILURE;
-}*/
+}
