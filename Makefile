@@ -40,3 +40,5 @@ pack:
 
 clean:
 	rm -rf $(BUILDDIR) $(BINDIR) doc || true
+
+.PHONY: all dirs pack clean
