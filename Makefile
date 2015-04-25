@@ -44,7 +44,7 @@ clean:
 test:
 	cd tests && make
 
-.PHONY: all dirs pack clean test
+.PHONY: all dirs pack clean test install debian-package
 
 prefix = /usr/local
 bindir = $(prefix)/bin
@@ -55,3 +55,6 @@ man1dir = $(mandir)/man1
 install: all
 	install bin/pie_calc $(DESTDIR)$(bindir)
 	install -m 0644 data/pie_calc.glade $(DESTDIR)$(bindir)
+
+debian-package:
+	./debian-package.sh
