@@ -14,7 +14,7 @@ all: pietests
 	rm pietests
 
 pietests: $(OBJ) $(SRC)/piemath.h
-	$(CC) $(LIBRARIES) $(OBJ) -o $@
+	$(CC) -o $@ $(OBJ) $(LIBRARIES)
 
 piemath_tests.o: piemath_tests.c
 	$(CC) $(CFLAGS) -c $<
