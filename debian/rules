@@ -2,4 +2,4 @@
 %:
 	dh $@
 override_dh_auto_install:
-	$(MAKE) DESTDIR=$$(pwd)/debian/hithere prefix=/usr install
+	$(MAKE) DESTDIR=$$(pwd)/debian/piecalc prefix=/usr install
