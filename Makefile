@@ -92,5 +92,9 @@ install:
 	install bin/piecalc $(DESTDIR)$(bindir)
 	install -m 0644 data/piecalc.glade $(DESTDIR)$(sharedir)/piecalc
 
+	gzip -k man/piecalc.1
+	install -m 0644 man/piecalc.1 $(DESTDIR)$(man1dir)
+	rm man/piecalc.1.gz
+
 debian-package:
 	./debian-package.sh
