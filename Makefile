@@ -98,3 +98,6 @@ install:
 
 debian-package:
 	./debian-package.sh
+
+remove:
+	rm -rf /usr/bin/piecalc /usr/share/piecalc /usr/share/man/man1/piecalc.1.gz
