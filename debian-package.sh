@@ -8,7 +8,7 @@ FULLNAME="$NAME-$VERSION"
 rm -rf "/tmp/$FULLNAME-package"
 mkdir -p "/tmp/$FULLNAME-package"
 
-git archive --format tar "--prefix=$FULLNAME/" master | gzip > "/tmp/$FULLNAME-package/$FULLNAME.orig.tar.gz"
+git archive --format tar "--prefix=$FULLNAME/" HEAD | gzip > "/tmp/$FULLNAME-package/$FULLNAME.orig.tar.gz"
 
 DIR=`pwd`
 cd "/tmp/$FULLNAME-package"
