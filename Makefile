@@ -4,15 +4,6 @@
 # TODO: Solve dependencies
 #
 
-ifeq ($(platform),win32)
-	CC := i686-w64-mingw32-gcc
-	export PKG_CONFIG_PATH=../gtk/lib/pkgconfig
-endif
-
-ifndef CC
-	CC := gcc
-endif
-
 CFLAGS := -std=c99 -Wall -Wextra -pedantic -g `pkg-config --cflags gtk+-3.0`
 LIBS := -lm -export-dynamic `pkg-config --libs gtk+-3.0`
 
@@ -24,7 +15,7 @@ SOURCES := $(shell find $(SRC) -type f -name *.$(CODE))
 OBJ := $(patsubst $(SRC)/%, $(BUILDDIR)/%, $(SOURCES:.$(CODE)=.o)) 
 TARGET := bin/piecalc
 
-#### MAIN TARGETS
+#### MAIN RULES
 
 # Development build
 devel: GLADE_PATH := data/
@@ -32,19 +23,24 @@ devel: all
 
 # Linux package build
 linux: GLADE_PATH := /usr/share/piecalc/
-linux: all
+linux: clean all
 
 # Windows package build
 # windows: GLADE_PATH := %ProgramFiles%\PieCalc\ -> I don't think it's needed, needs testing
 windows: CC := i686-w64-mingw32-gcc
-windows: windows-prebuild all
+windows: export PKG_CONFIG_PATH=gtk/lib/pkgconfig
+windows: TARGET := $(TARGET).exe
+windows: clean gtk/gtk+-bundle_3.6.4-20130921_win32.zip all
 
-windows-prebuild: ../gtk+-bundle_3.10.4-20131202_win32.zip
-	export PKG_CONFIG_PATH=../gtk/lib/pkgconfig
+gtk/gtk+-bundle_3.6.4-20130921_win32.zip:
+	mkdir gtk || true ;\
+	cd gtk ;\
+	wget http://win32builder.gnome.org/gtk+-bundle_3.6.4-20130921_win32.zip 2>/dev/null ;\
+	unzip gtk+-bundle_3.6.4-20130921_win32.zip > /dev/null ;\
+	find -name '*.pc' | while read pc; do sed -e "s@^prefix=.*@prefix=$$PWD@" -i "$$pc"; done
 
-../gtk+-bundle_3.10.4-20131202_win32.zip:
-	mkdir ../gtk ; cd ../gtk ; wget http://win32builder.gnome.org/gtk+-bundle_3.10.4-20131202_win32.zip ; unzip gtk+-bundle_3.10.4-20131202_win32.zip
 
+# Classic all build rule
 all: dirs $(TARGET)
 
 dirs:
