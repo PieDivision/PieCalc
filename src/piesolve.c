@@ -51,11 +51,11 @@ typedef struct {
 } function;
 
 function functions[] = {
-	{"sqrt", sqrt},
-	{"log", log10},
-	{"ln", log},
-	{"cbrt", cbrt},
-	{"exp", exp},
+	{"sqrt", piemathSqrt},
+	{"log",  piemathLog},
+	{"ln",   piemathLn},
+	{"cbrt", piemathCbrt},
+	{"exp",  piemathExp},
 	{"rand", piemathRand}
 };
 
