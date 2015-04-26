@@ -17,7 +17,6 @@ tar -axf "$FULLNAME.orig.tar.gz"
 
 cd "$FULLNAME"
 mkdir debian
-dch --create -v 1.0 --package piecalc --empty
 echo 9 > debian/compat
 
 debuild -us -uc
