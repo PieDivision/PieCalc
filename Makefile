@@ -24,6 +24,9 @@ SOURCES := $(shell find $(SRC) -type f -name *.$(CODE))
 OBJ := $(patsubst $(SRC)/%, $(BUILDDIR)/%, $(SOURCES:.$(CODE)=.o)) 
 TARGET := bin/pie_calc
 
+devel: GLADE_PATH := data/
+devel: all
+
 all: dirs $(TARGET)
 
 dirs:
@@ -33,7 +36,7 @@ $(TARGET): $(OBJ)
 	$(CC) $^ -o $(TARGET) $(LIBS)
 
 $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
-	$(CC) $(CFLAGS) -c -o $@ $< $(LIBS)
+	$(CC) $(CFLAGS) -DGLADE_PATH='"$(GLADE_PATH)"' -c -o $@ $< $(LIBS)
 
 pack:
 	tar --exclude='run' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
@@ -58,3 +61,9 @@ install: all
 
 debian-package:
 	./debian-package.sh
+
+run: devel
+	bin/pie_calc
+
+debug: devel
+	ddd bin/pie_calc

@@ -1,5 +1,0 @@
-#!/bin/sh
-
-
-cd data
-ddd ../bin/pie_calc

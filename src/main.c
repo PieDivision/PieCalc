@@ -14,6 +14,11 @@
 /// Our awesome lib
 #include "piesolve.h"
 
+// Set glade path to nothing when unset
+#ifndef GLADE_PATH
+	#define GLADE_PATH
+#endif
+
 /// Global variables for reading strings from text entry and storing of the result
 char text[1000] = "";
 char dynamicRes[1000] = "";
@@ -199,7 +204,7 @@ int main(int argc, char *argv[])
 
 	gtkBuilder = gtk_builder_new();
 	GError *err = NULL; // Variable for error handling
-	gtk_builder_add_from_file(gtkBuilder, "pie_calc.glade", &err);
+	gtk_builder_add_from_file(gtkBuilder, GLADE_PATH "pie_calc.glade", &err);
 
 	// get object from .glade file into GUI struct	
 	gui -> window = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "PieCalc"));
