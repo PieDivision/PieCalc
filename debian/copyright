@@ -1,0 +1,10 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: PieCalc
+Copyright: 2015 Pie Division
+License: GPL-3+
+
+Files: *
+Copyright: 2015       Štěpánka Barotová <stepbar@gmail.com>
+           2015       David Beneš <benys94@gmail.com>
+           2015       Ondřej Budai <ondrej@budai.cz>
+License: GPL-3+
