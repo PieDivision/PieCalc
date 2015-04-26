@@ -13,7 +13,7 @@ BUILDDIR := build
 BINDIR := bin
 SOURCES := $(shell find $(SRC) -type f -name *.$(CODE))
 OBJ := $(patsubst $(SRC)/%, $(BUILDDIR)/%, $(SOURCES:.$(CODE)=.o)) 
-TARGET := bin/piecalc
+TARGET := $(BINDIR)/piecalc
 
 #### MAIN RULES
 
@@ -39,45 +39,58 @@ gtk/gtk+-bundle_3.6.4-20130921_win32.zip:
 	unzip gtk+-bundle_3.6.4-20130921_win32.zip > /dev/null ;\
 	find -name '*.pc' | while read pc; do sed -e "s@^prefix=.*@prefix=$$PWD@" -i "$$pc"; done
 
+# Rule which runs all tests
+test:
+	cd tests && make
+
+### DEVELOPMENT RULES
+
+# Run the program, simple
+run: devel
+	$(TARGET)
+
+debug: devel
+	ddd $(TARGET)
+
+
+#### BUILDING RULES
 
 # Classic all build rule
 all: dirs $(TARGET)
 
+# Create directories neede to build
 dirs:
-	mkdir -p bin $(BUILDDIR)
+	mkdir -p $(BINDIR) $(BUILDDIR)
 
+# Make target from object files
 $(TARGET): $(OBJ)
 	$(CC) $^ -o $(TARGET) $(LIBS)
 
+# General rule how to make object file from source file
 $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
 	$(CC) $(CFLAGS) -DGLADE_PATH='"$(GLADE_PATH)"' -c -o $@ $< $(LIBS)
 
+# Pack target
 pack:
 	tar --exclude='run' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
 
+# Clean target
 clean:
 	rm -rf $(BUILDDIR) $(BINDIR) doc || true
 
-test:
-	cd tests && make
-
+# Phony
 .PHONY: all dirs pack clean test install debian-package
 
-prefix = /usr/local
+prefix = /usr
 bindir = $(prefix)/bin
 sharedir = $(prefix)/share
 mandir = $(sharedir)/man
 man1dir = $(mandir)/man1
 
 install: all
+	mkdir -p $(sharedir)/piecalc
 	install bin/piecalc $(DESTDIR)$(bindir)
-	install -m 0644 data/piecalc.glade $(DESTDIR)$(bindir)
+	install -m 0644 data/piecalc.glade $(DESTDIR)$(sharedir)/piecalc
 
 debian-package:
 	./debian-package.sh
-
-run: devel
-	bin/piecalc
-
-debug: devel
-	ddd bin/piecalc
