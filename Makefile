@@ -68,7 +68,7 @@ $(TARGET): $(OBJ)
 
 # General rule how to make object file from source file
 $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
-	$(CC) $(CFLAGS) -DGLADE_PATH='"$(GLADE_PATH)"' -c -o $@ $< $(LIBS)
+	$(CC) $(CFLAGS) -DGLADE_PATH='"$(GLADE_PATH)"' -c -o $@ $<
 
 # Pack target
 pack:
