@@ -125,7 +125,7 @@ double piemathSquare(double a){
  * @param a Number b
  * @return Number a to the power of b
  */
-double piemathPower(double a, int b){
+double piemathPower(double a, double b){
 	return pow(a, b);
 }
 
