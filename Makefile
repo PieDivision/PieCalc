@@ -22,10 +22,28 @@ BUILDDIR := build
 BINDIR := bin
 SOURCES := $(shell find $(SRC) -type f -name *.$(CODE))
 OBJ := $(patsubst $(SRC)/%, $(BUILDDIR)/%, $(SOURCES:.$(CODE)=.o)) 
-TARGET := bin/pie_calc
+TARGET := bin/piecalc
 
+#### MAIN TARGETS
+
+# Development build
 devel: GLADE_PATH := data/
 devel: all
+
+# Linux package build
+linux: GLADE_PATH := /usr/share/piecalc/
+linux: all
+
+# Windows package build
+# windows: GLADE_PATH := %ProgramFiles%\PieCalc\ -> I don't think it's needed, needs testing
+windows: CC := i686-w64-mingw32-gcc
+windows: windows-prebuild all
+
+windows-prebuild: ../gtk+-bundle_3.10.4-20131202_win32.zip
+	export PKG_CONFIG_PATH=../gtk/lib/pkgconfig
+
+../gtk+-bundle_3.10.4-20131202_win32.zip:
+	mkdir ../gtk ; cd ../gtk ; wget http://win32builder.gnome.org/gtk+-bundle_3.10.4-20131202_win32.zip ; unzip gtk+-bundle_3.10.4-20131202_win32.zip
 
 all: dirs $(TARGET)
 
@@ -56,14 +74,14 @@ mandir = $(sharedir)/man
 man1dir = $(mandir)/man1
 
 install: all
-	install bin/pie_calc $(DESTDIR)$(bindir)
-	install -m 0644 data/pie_calc.glade $(DESTDIR)$(bindir)
+	install bin/piecalc $(DESTDIR)$(bindir)
+	install -m 0644 data/piecalc.glade $(DESTDIR)$(bindir)
 
 debian-package:
 	./debian-package.sh
 
 run: devel
-	bin/pie_calc
+	bin/piecalc
 
 debug: devel
-	ddd bin/pie_calc
+	ddd bin/piecalc

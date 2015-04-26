@@ -204,7 +204,7 @@ int main(int argc, char *argv[])
 
 	gtkBuilder = gtk_builder_new();
 	GError *err = NULL; // Variable for error handling
-	gtk_builder_add_from_file(gtkBuilder, GLADE_PATH "pie_calc.glade", &err);
+	gtk_builder_add_from_file(gtkBuilder, GLADE_PATH "piecalc.glade", &err);
 
 	// get object from .glade file into GUI struct	
 	gui -> window = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "PieCalc"));
