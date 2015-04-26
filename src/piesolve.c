@@ -207,7 +207,7 @@ double solve_pow(string expr){
 		return NAN;
 	}
 
-	return pow(solve_pow(l), solve_pow(r));
+	return piemathPower(solve_pow(l), solve_pow(r));
 }
 
 double solve_multiply(string expr){
@@ -224,7 +224,7 @@ double solve_multiply(string expr){
 		return NAN;
 	}
 
-	return solve_multiply(l) * solve_multiply(r);
+	return piemathMultiply(solve_multiply(l), solve_multiply(r));
 }
 
 double solve_div(string expr){
@@ -241,7 +241,7 @@ double solve_div(string expr){
 		return NAN;
 	}
 
-	return solve_div(l) / solve_div(r);
+	return piemathDivide(solve_div(l), solve_div(r));
 }
 
 
@@ -259,7 +259,7 @@ double solve_minus(string expr){
 		return NAN;
 	}
 
-	return solve_minus(l) - solve_minus(r);
+	return piemathSubtract(solve_minus(l), solve_minus(r));
 }
 
 double solve_plus(string expr){
@@ -276,7 +276,7 @@ double solve_plus(string expr){
 		return NAN;
 	}
 
-	return solve_plus(l) + solve_plus(r);
+	return piemathAdd(solve_plus(l), solve_plus(r));
 }
 
 char *checkBrackets(char *expr){
