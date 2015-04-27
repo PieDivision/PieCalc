@@ -1,3 +1,10 @@
+/**
+ * @file piemath.h
+ *
+ * @brief Library with basic arithmetic operations
+ * @author Ondřej Budai <ondrej@budai.cz>
+ */
+
 #ifndef PIEMATH_H
 #define PIEMATH_H
 
@@ -10,7 +17,7 @@ double piemathLog(double a);
 double piemathSqrt(double a);
 double piemathCbrt(double a);
 double piemathSquare(double a);
-double piemathPower(double a, int power);
+double piemathPower(double a, double b);
 double piemathExp(double a);
 unsigned long long piemathFact(unsigned int a);
 double piemathE();
