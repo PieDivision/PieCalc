@@ -6,4 +6,4 @@ cp data/pie_calc.spec ~/rpmbuild/SPECS/
 cd ~/rpmbuild/SPECS/
 rpmbuild -ba pie_calc.spec
 cd -
-mv ~/rpmbuild/RPMS/x86_64/piecalc-1.0-1.fc21.x86_64.rpm .
+mv ~/rpmbuild/RPMS/x86_64/piecalc*.rpm .
