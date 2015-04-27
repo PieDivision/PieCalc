@@ -72,7 +72,7 @@ $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
 
 # Pack target
 pack:
-	tar --exclude='run' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
+	tar --exclude='run' --exclude='debian' --exclude='tests' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
 
 # Clean target
 clean:
@@ -91,9 +91,11 @@ install:
 	mkdir -p $(DESTDIR)$(sharedir)/piecalc
 	install bin/piecalc $(DESTDIR)$(bindir)
 	install -m 0644 data/piecalc.glade $(DESTDIR)$(sharedir)/piecalc
+	install -m 0644 data/icon_*.png $(DESTDIR)$(sharedir)/piecalc
+	install -m 0644 data/pie_calc.desktop $(DESTDIR)$(sharedir)/applications
 
 	gzip -k man/piecalc.1
-	install -m 0644 man/piecalc.1 $(DESTDIR)$(man1dir)
+	install -m 0644 man/piecalc.1.gz $(DESTDIR)$(man1dir)
 	rm man/piecalc.1.gz
 
 debian-package:
