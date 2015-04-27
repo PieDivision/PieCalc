@@ -88,6 +88,7 @@ mandir = $(sharedir)/man
 man1dir = $(mandir)/man1
 
 install:
+	mkdir -p $(man1dir)
 	mkdir -p $(DESTDIR)$(sharedir)/piecalc
 	install bin/piecalc $(DESTDIR)$(bindir)
 	install -m 0644 data/piecalc.glade $(DESTDIR)$(sharedir)/piecalc
