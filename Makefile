@@ -30,6 +30,7 @@ linux: clean all
 windows: CC := i686-w64-mingw32-gcc
 windows: export PKG_CONFIG_PATH=gtk/lib/pkgconfig
 windows: TARGET := $(TARGET).exe
+windows: LIBS += -mwindows
 windows: clean gtk/gtk+-bundle_3.6.4-20130921_win32.zip all
 
 gtk/gtk+-bundle_3.6.4-20130921_win32.zip:
