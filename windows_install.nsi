@@ -76,7 +76,7 @@ Section "Install"
 	; Create shortcuts
 	;!insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     	CreateDirectory "$SMPROGRAMS\${COMPANYNAME}"
-    	createShortCut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME}.lnk" "$INSTDIR\pie_calc.exe" "" "$INSTDIR\data\icon_128x128.ico"
+    	createShortCut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME}.lnk" "$INSTDIR\piecalc.exe" "" "$INSTDIR\icon_128x128.ico"
     	CreateShortcut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME}-uninstall.lnk" "$INSTDIR\Uninstall.exe"
   	;!insertmacro MUI_STARTMENU_WRITE_END
 
