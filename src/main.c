@@ -11,7 +11,7 @@
 #include <locale.h>
 #include <math.h>
 
-/// Our awesome lib
+// Our awesome lib
 #include "piesolve.h"
 
 // Set glade path to nothing when unset
@@ -53,7 +53,7 @@ Translate table[] = {
 /**
  * @brief Translate function button into shape which will be compatible with piemath.h
  *
- * @param[text] text of gtk button label which could be translated
+ * @param text text of gtk button label which could be translated
  * @return Rutine returns translated text or unchanged text if couldn't be translated
  */
 char *get_func(char *text)
@@ -85,8 +85,8 @@ G_MODULE_EXPORT void numeric_button_clicked(GtkButton *w, GtkEntry *entry)
  *
  * @todo Edit dynamic result for end bracket
  *
- * @param[entry] Main editable display of piecalc
- * @param[label] Secondary display of piecal which shows dynamic result or error in equation
+ * @param entry Main editable display of piecalc
+ * @param label Secondary display of piecal which shows dynamic result or error in equation
  */
 G_MODULE_EXPORT void editable_result(GtkEntry *entry, GtkLabel *label)
 {
@@ -130,8 +130,8 @@ G_MODULE_EXPORT void editable_result(GtkEntry *entry, GtkLabel *label)
 /**
  * @brief Delete last character of text entry (eqation)
  *
- * @param[w] Button which has sent a signal
- * @param[entry] Display of the calculator
+ * @param w Button which has sent a signal
+ * @param entry Display of the calculator
  */
 G_MODULE_EXPORT void delete_one(GtkButton *w, GtkEntry *entry)
 {
@@ -144,8 +144,8 @@ G_MODULE_EXPORT void delete_one(GtkButton *w, GtkEntry *entry)
 /**
  * @brief This rutine clears arrays and text entry
  *
- * @param[w] Button whis has sent a signal
- * @param[entry] Display of the calculator which has to be cleared
+ * @param w Button whis has sent a signal
+ * @param entry Display of the calculator which has to be cleared
  */
 G_MODULE_EXPORT void clear_clicked(GtkButton *w, GtkEntry *entry)
 {
@@ -193,6 +193,12 @@ G_MODULE_EXPORT void quitHelp(GtkButton *w, GtkDialog *d)
 	gtk_dialog_response(d, 1);
 }
 
+/**
+ * @brief main rutine of program
+ * @param argc argument count
+ * @param argv argument value
+ * @return Rutine returns 0 if success or 1 if it fails
+ */
 int main(int argc, char *argv[])
 {
 	GtkBuilder *gtkBuilder;
