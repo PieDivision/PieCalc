@@ -101,7 +101,7 @@ G_MODULE_EXPORT void editable_result(GtkEntry *entry, GtkLabel *label)
 		// Read last character of equation
 		char c = dynamicRes[strlen(dynamicRes) - 1];
 		
-		sprintf(dynamicRes, "%.2f", pieSolver((char *)text));
+		sprintf(dynamicRes, "%.10g", pieSolver((char *)text));
 	
 		// if last character of equation is arithmetic operatin make dynamic result
 		if(c == '+' || c == '-' || c == '*' || c == '/' || c == ')'){
