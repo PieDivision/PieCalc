@@ -121,12 +121,12 @@ G_MODULE_EXPORT void editable_result(GtkEntry *entry, GtkLabel *label)
 				gtk_label_set_text(label, dynamicRes);
 				gtk_entry_set_text(entry, dynamicRes);	
 			}
+			gtk_editable_set_position(GTK_EDITABLE(entry), -1); // Set cursor at the end of text entry
 		}
 	}
 	else
 		gtk_label_set_text(label, ""); // If text entry is empty, clear label too
 
-	gtk_editable_set_position(GTK_EDITABLE(entry), -1); // Set cursor at the end of text entry
 } /// End of rutine editable_result
 
 /**
