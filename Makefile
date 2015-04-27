@@ -1,10 +1,21 @@
 # PieCalc Makefile by David Benes
-# Written in Vim editor
 #
-# TODO: Solve dependencies
+# Basic overview:
+# make (alias make devel) - makes project for debugging
+# make linux - makes linux release (requires GTK3 devel packages installed)
+# make windows - makes windows release (requires MingW64 - dependencies are auto downloaded)
+# make test - tests math library
+# make run - runs the program (if not built, it build run make devel)
+# make debug - runs the program in ddd debug enviroment
+# make clean - cleans the building mess
+# make install - installs the package to system
+# make remove - removes the package from system
+# make debian-package - makes deb package (requires debhelper and devscripts)
+# make windows-package - makes windows installer (requires mingw32-nsis)
+# make doc - makes doc
 #
 
-CFLAGS := -std=c99 -Wall -Wextra -pedantic -g `pkg-config --cflags gtk+-3.0`
+CFLAGS := -std=c99 -Wall -Wextra -pedantic -O2 `pkg-config --cflags gtk+-3.0`
 LIBS := -lm -export-dynamic `pkg-config --libs gtk+-3.0`
 
 CODE := c
@@ -19,6 +30,7 @@ TARGET := $(BINDIR)/piecalc
 
 # Development build
 devel: GLADE_PATH := data/
+devel: CFLAGS += -g
 devel: all
 
 # Linux package build
@@ -44,7 +56,43 @@ gtk/gtk+-bundle_3.6.4-20130921_win32.zip:
 test:
 	cd tests && make
 
-### DEVELOPMENT RULES
+# Clean target
+clean:
+	rm -rf $(BUILDDIR) $(BINDIR) doc || true
+
+prefix = /usr
+bindir = $(prefix)/bin
+sharedir = $(prefix)/share
+mandir = $(sharedir)/man
+man1dir = $(mandir)/man1
+
+install:
+	mkdir -p $(DESTDIR)$(man1dir)
+	mkdir -p $(DESTDIR)$(sharedir)/piecalc
+	mkdir -p $(DESTDIR)$(sharedir)/applications
+	mkdir -p $(DESTDIR)$(bindir)
+	install bin/piecalc $(DESTDIR)$(bindir)
+	install -m 0644 data/piecalc.glade $(DESTDIR)$(sharedir)/piecalc
+	install -m 0644 data/icon_*.png $(DESTDIR)$(sharedir)/piecalc
+	install -m 0644 data/pie_calc.desktop $(DESTDIR)$(sharedir)/applications
+
+	gzip -k man/piecalc.1
+	install -m 0644 man/piecalc.1.gz $(DESTDIR)$(man1dir)
+	rm man/piecalc.1.gz
+
+debian-package: linux
+	./debian-package.sh
+
+windows-package: windows
+	makensis install_script.nsi
+
+remove:
+	rm -rf /usr/bin/piecalc /usr/share/piecalc /usr/share/man/man1/piecalc.1.gz /usr/share/applications/pie_calc.desktop
+
+doc:
+	doxygen
+
+#### DEVELOPMENT RULES
 
 # Run the program, simple
 run: devel
@@ -52,7 +100,6 @@ run: devel
 
 debug: devel
 	ddd $(TARGET)
-
 
 #### BUILDING RULES
 
@@ -75,41 +122,5 @@ $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
 pack:
 	tar --exclude='run' --exclude='debian' --exclude='tests' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
 
-# Clean target
-clean:
-	rm -rf $(BUILDDIR) $(BINDIR) doc || true
-
 # Phony
-.PHONY: all dirs pack clean test install debian-package doc
-
-prefix = /usr
-bindir = $(prefix)/bin
-sharedir = $(prefix)/share
-mandir = $(sharedir)/man
-man1dir = $(mandir)/man1
-
-install:
-	mkdir -p $(DESTDIR)$(man1dir)
-	mkdir -p $(DESTDIR)$(sharedir)/piecalc
-	mkdir -p $(DESTDIR)$(sharedir)/applications
-	mkdir -p $(DESTDIR)$(bindir)
-	install bin/piecalc $(DESTDIR)$(bindir)
-	install -m 0644 data/piecalc.glade $(DESTDIR)$(sharedir)/piecalc
-	install -m 0644 data/icon_*.png $(DESTDIR)$(sharedir)/piecalc
-	install -m 0644 data/pie_calc.desktop $(DESTDIR)$(sharedir)/applications
-
-	gzip -k man/piecalc.1
-	install -m 0644 man/piecalc.1.gz $(DESTDIR)$(man1dir)
-	rm man/piecalc.1.gz
-
-debian-package:
-	./debian-package.sh
-
-windows-package: windows
-	makensis install_script.nsi
-
-remove:
-	rm -rf /usr/bin/piecalc /usr/share/piecalc /usr/share/man/man1/piecalc.1.gz /usr/share/applications/pie_calc.desktop
-
-doc:
-	doxygen
+.PHONY: devel linux windows test clean install debian-package windows-package remove doc all dirs pack
