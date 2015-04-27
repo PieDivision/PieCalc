@@ -125,6 +125,8 @@ G_MODULE_EXPORT void editable_result(GtkEntry *entry, GtkLabel *label)
 	}
 	else
 		gtk_label_set_text(label, ""); // If text entry is empty, clear label too
+
+	gtk_editable_set_position(GTK_EDITABLE(entry), -1); // Set cursor at the end of text entry
 } /// End of rutine editable_result
 
 /**
@@ -194,6 +196,28 @@ G_MODULE_EXPORT void quitHelp(GtkButton *w, GtkDialog *d)
 }
 
 /**
+ * @brief This rutine hadle key event. If return key is pressed resolve will printed
+ * @param window Main window
+ * @param event Contains name of pressed key
+ * @param entry Display of PieCalc
+ */
+static void key_event(GtkWidget *window, GdkEventKey *event, GtkEntry *entry){
+	
+	(void)window;
+	(void)entry;
+
+	memset(&dynamicRes[0], 0, sizeof(dynamicRes)); // Clear array
+
+	// If pressed key was return proceed.
+	// Insert equal sign into text entry and rutine editable_result will called
+	if(strcmp((gdk_keyval_name(event -> keyval)), "Return") == 0){
+		strcpy(dynamicRes, gtk_entry_get_text(entry));
+		strcat(dynamicRes, "=");
+		gtk_entry_set_text(entry, dynamicRes);
+	}
+}
+
+/**
  * @brief main rutine of program
  * @param argc argument count
  * @param argv argument value
@@ -216,6 +240,7 @@ int main(int argc, char *argv[])
 	gui -> window = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "PieCalc"));
 	gui -> about = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "aboutDialog"));
 	gui -> help = GTK_WIDGET(gtk_builder_get_object(gtkBuilder, "helpDialog"));
+	gui -> entry = GTK_ENTRY(gtk_builder_get_object(gtkBuilder, "entry1"));
 
 	gtk_builder_connect_signals (gtkBuilder, gui);
 
@@ -223,6 +248,7 @@ int main(int argc, char *argv[])
 
 	// Signal for exiting GTK window
 	g_signal_connect(gui -> window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+	g_signal_connect(gui -> window, "key-release-event", G_CALLBACK(key_event), gui -> entry);
 
 	// Display GTK window
 	gtk_widget_show(gui -> window);
