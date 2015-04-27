@@ -105,6 +105,9 @@ install:
 debian-package:
 	./debian-package.sh
 
+windows-package: windows
+	makensis install_script.nsi
+	
 remove:
 	rm -rf /usr/bin/piecalc /usr/share/piecalc /usr/share/man/man1/piecalc.1.gz
 
