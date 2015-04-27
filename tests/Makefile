@@ -12,6 +12,7 @@ OBJ=piemath_tests.o piemath.o
 all: pietests
 	./pietests
 	rm pietests
+	rm *.o
 
 pietests: $(OBJ) $(SRC)/piemath.h
 	$(CC) -o $@ $(OBJ) $(LIBRARIES)
