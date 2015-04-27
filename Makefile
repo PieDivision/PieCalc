@@ -77,7 +77,7 @@ pack:
 
 # Clean target
 clean:
-	rm -rf $(BUILDDIR) $(BINDIR) doc || true
+	rm -rf $(BUILDDIR) $(BINDIR) doc gtk || true
 
 # Phony
 .PHONY: all dirs pack clean test install debian-package
