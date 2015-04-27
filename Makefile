@@ -59,7 +59,7 @@ test:
 
 # Clean target
 clean:
-	rm -rf $(BUILDDIR) $(BINDIR) doc || true
+	rm -rf $(BUILDDIR) $(BINDIR) docs || true
 
 prefix = /usr
 bindir = $(prefix)/bin
