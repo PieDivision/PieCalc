@@ -11,6 +11,7 @@
 # make install - installs the package to system
 # make remove - removes the package from system
 # make debian-package - makes deb package (requires debhelper and devscripts)
+# make rpm-package - makes rpm package (requires rpm build package)
 # make windows-package - makes windows installer (requires mingw32-nsis)
 # make doc - makes doc
 #
@@ -58,7 +59,7 @@ test:
 
 # Clean target
 clean:
-	rm -rf $(BUILDDIR) $(BINDIR) doc || true
+	rm -rf $(BUILDDIR) $(BINDIR) docs || true
 
 prefix = /usr
 bindir = $(prefix)/bin
@@ -85,6 +86,9 @@ debian-package: linux
 
 windows-package: windows
 	makensis windows_install.nsi
+
+rpm-package:
+	./rpm-package.sh
 
 remove:
 	rm -rf /usr/bin/piecalc /usr/share/piecalc /usr/share/man/man1/piecalc.1.gz /usr/share/applications/pie_calc.desktop
@@ -118,9 +122,5 @@ $(TARGET): $(OBJ)
 $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
 	$(CC) $(CFLAGS) -DGLADE_PATH='"$(GLADE_PATH)"' -c -o $@ $<
 
-# Pack target
-pack:
-	tar --exclude='run' --exclude='debian' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
-
 # Phony
-.PHONY: devel linux windows test clean install debian-package windows-package remove doc all dirs pack
+.PHONY: devel linux windows test clean install debian-package rpm-package windows-package remove doc all dirs
