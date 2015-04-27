@@ -56,37 +56,6 @@ gtk/gtk+-bundle_3.6.4-20130921_win32.zip:
 test:
 	cd tests && make
 
-### DEVELOPMENT RULES
-
-# Run the program, simple
-run: devel
-	$(TARGET)
-
-debug: devel
-	ddd $(TARGET)
-
-
-#### BUILDING RULES
-
-# Classic all build rule
-all: dirs $(TARGET)
-
-# Create directories neede to build
-dirs:
-	mkdir -p $(BINDIR) $(BUILDDIR)
-
-# Make target from object files
-$(TARGET): $(OBJ)
-	$(CC) $^ -o $(TARGET) $(LIBS)
-
-# General rule how to make object file from source file
-$(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
-	$(CC) $(CFLAGS) -DGLADE_PATH='"$(GLADE_PATH)"' -c -o $@ $<
-
-# Pack target
-pack:
-	tar --exclude='run' --exclude='debian' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
-
 # Clean target
 clean:
 	rm -rf $(BUILDDIR) $(BINDIR) doc || true
@@ -151,7 +120,7 @@ $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
 
 # Pack target
 pack:
-	tar --exclude='run' --exclude='debian' --exclude='tests' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
+	tar --exclude='run' --exclude='debian' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
 
 # Phony
 .PHONY: devel linux windows test clean install debian-package windows-package remove doc all dirs pack
