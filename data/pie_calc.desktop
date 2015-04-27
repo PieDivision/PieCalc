@@ -1,6 +1,11 @@
 [Desktop Entry]
+Version=1.0
 Name=PieCalc
-Exec=/opt/pie_calc/pie_calc
-Icon=/opt/pie_calc/icon/icon_256x256.png
+Comment[cs]=Kalkulačka pro počítání příkladů
+Comment[en]=Calculator for solving equations
 Type=Application
 Categories=GNOME;GTK;accessories;office;
+Keywords[cs]=kalkulačka;příklad;rovnice;kovár;matematika;
+Keywords[en]=calculator;equation;solving;math;kovar;
+Exec=/usr/bin/piecalc %U
+Icon=/usr/share/piecalc/icon_256x256.png
