@@ -1,9 +1,13 @@
 build
 bin
 data/pie_calc.glade~
+data/piecalc.glade~
 *.o
 docs
 piecalc-1.0.tar.gz
 gtk*
 *.deb
 *.rpm
+manual.pdf
+data/#pie_calc.glade#
+data/#piecalc.glade#

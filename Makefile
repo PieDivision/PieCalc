@@ -14,6 +14,7 @@
 # make rpm-package - makes rpm package (requires rpm build package)
 # make windows-package - makes windows installer (requires mingw32-nsis)
 # make doc - makes doc
+# make manual - makes simple pdf manual
 #
 
 CFLAGS := -std=c99 -Wall -Wextra -pedantic -O2 `pkg-config --cflags gtk+-3.0`
@@ -95,6 +96,9 @@ remove:
 
 doc:
 	doxygen
+
+manual:
+	pandoc -f markdown -t latex -o manual.pdf < README.txt
 
 #### DEVELOPMENT RULES
 
