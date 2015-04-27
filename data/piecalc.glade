@@ -11,14 +11,14 @@
     <property name="type_hint">dialog</property>
     <property name="program_name">PieCalc</property>
     <property name="version">1.0</property>
-    <property name="icon">../icon/icon_128x128.png</property>
+    <property name="icon">icon_128x128.png</property>
     <property name="copyright" translatable="yes">Copyright ©2015</property>
     <property name="comments" translatable="yes">Easy-to-use calculator with basic functions.
 
 Authors:
 Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
     <property name="authors">Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
-    <property name="logo">../icon/icon_256x256.png</property>
+    <property name="logo">icon_256x256.png</property>
     <property name="license_type">gpl-3-0</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="aboutDialog1">
@@ -54,7 +54,7 @@ Pie Division (Ondřej Budai, David Beneš, Štěpánka Barotová)</property>
     <property name="height_request">250</property>
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
-    <property name="icon">../icon/icon_128x128.png</property>
+    <property name="icon">icon_128x128.png</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox1">
         <property name="can_focus">False</property>
@@ -178,7 +178,7 @@ Happy PieCalculating!</property>
     <property name="resizable">False</property>
     <property name="default_width">-1</property>
     <property name="default_height">1</property>
-    <property name="icon">../icon/icon_128x128.png</property>
+    <property name="icon">icon_128x128.png</property>
     <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
     <child>
       <object class="GtkBox" id="box1">
