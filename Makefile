@@ -30,6 +30,7 @@ linux: clean all
 windows: CC := i686-w64-mingw32-gcc
 windows: export PKG_CONFIG_PATH=gtk/lib/pkgconfig
 windows: TARGET := $(TARGET).exe
+windows: LIBS += -mwindows
 windows: clean gtk/gtk+-bundle_3.6.4-20130921_win32.zip all
 
 gtk/gtk+-bundle_3.6.4-20130921_win32.zip:
@@ -68,11 +69,11 @@ $(TARGET): $(OBJ)
 
 # General rule how to make object file from source file
 $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
-	$(CC) $(CFLAGS) -DGLADE_PATH='"$(GLADE_PATH)"' -c -o $@ $< $(LIBS)
+	$(CC) $(CFLAGS) -DGLADE_PATH='"$(GLADE_PATH)"' -c -o $@ $<
 
 # Pack target
 pack:
-	tar --exclude='run' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
+	tar --exclude='run' --exclude='debian' --exclude='tests' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
 
 # Clean target
 clean:
@@ -88,13 +89,21 @@ mandir = $(sharedir)/man
 man1dir = $(mandir)/man1
 
 install:
+	mkdir -p $(DESTDIR)$(man1dir)
 	mkdir -p $(DESTDIR)$(sharedir)/piecalc
+	mkdir -p $(DESTDIR)$(sharedir)/applications
+	mkdir -p $(DESTDIR)$(bindir)
 	install bin/piecalc $(DESTDIR)$(bindir)
 	install -m 0644 data/piecalc.glade $(DESTDIR)$(sharedir)/piecalc
+	install -m 0644 data/icon_*.png $(DESTDIR)$(sharedir)/piecalc
+	install -m 0644 data/pie_calc.desktop $(DESTDIR)$(sharedir)/applications
 
 	gzip -k man/piecalc.1
-	install -m 0644 man/piecalc.1 $(DESTDIR)$(man1dir)
+	install -m 0644 man/piecalc.1.gz $(DESTDIR)$(man1dir)
 	rm man/piecalc.1.gz
 
 debian-package:
 	./debian-package.sh
+
+remove:
+	rm -rf /usr/bin/piecalc /usr/share/piecalc /usr/share/man/man1/piecalc.1.gz

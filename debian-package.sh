@@ -17,7 +17,6 @@ tar -axf "$FULLNAME.orig.tar.gz"
 
 cd "$FULLNAME"
 mkdir debian
-echo 9 > debian/compat
 
 debuild -us -uc
 
