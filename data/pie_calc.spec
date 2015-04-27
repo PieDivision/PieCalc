@@ -24,10 +24,6 @@ make linux
 
 
 %install
-#rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/usr/bin
-mkdir -p $RPM_BUILD_ROOT/usr/share/man/man1
-mkdir -p $RPM_BUILD_ROOT/usr/share/applications
 %make_install
 
 
