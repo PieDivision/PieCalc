@@ -1,10 +1,21 @@
 # PieCalc Makefile by David Benes
-# Written in Vim editor
 #
-# TODO: Solve dependencies
+# Basic overview:
+# make (alias make devel) - makes project for debugging
+# make linux - makes linux release (requires GTK3 devel packages installed)
+# make windows - makes windows release (requires MingW64 - dependencies are auto downloaded)
+# make test - tests math library
+# make run - runs the program (if not built, it build run make devel)
+# make debug - runs the program in ddd debug enviroment
+# make clean - cleans the building mess
+# make install - installs the package to system
+# make remove - removes the package from system
+# make debian-package - makes deb package (requires debhelper and devscripts)
+# make windows-package - makes windows installer (requires mingw32-nsis)
+# make doc - makes doc
 #
 
-CFLAGS := -std=c99 -Wall -Wextra -pedantic -g `pkg-config --cflags gtk+-3.0`
+CFLAGS := -std=c99 -Wall -Wextra -pedantic -O2 `pkg-config --cflags gtk+-3.0`
 LIBS := -lm -export-dynamic `pkg-config --libs gtk+-3.0`
 
 CODE := c
@@ -19,6 +30,7 @@ TARGET := $(BINDIR)/piecalc
 
 # Development build
 devel: GLADE_PATH := data/
+devel: CFLAGS += -g
 devel: all
 
 # Linux package build
@@ -79,9 +91,6 @@ pack:
 clean:
 	rm -rf $(BUILDDIR) $(BINDIR) doc || true
 
-# Phony
-.PHONY: all dirs pack clean test install debian-package doc
-
 prefix = /usr
 bindir = $(prefix)/bin
 sharedir = $(prefix)/share
@@ -102,7 +111,7 @@ install:
 	install -m 0644 man/piecalc.1.gz $(DESTDIR)$(man1dir)
 	rm man/piecalc.1.gz
 
-debian-package:
+debian-package: linux
 	./debian-package.sh
 
 windows-package: windows
@@ -113,3 +122,36 @@ remove:
 
 doc:
 	doxygen
+
+#### DEVELOPMENT RULES
+
+# Run the program, simple
+run: devel
+	$(TARGET)
+
+debug: devel
+	ddd $(TARGET)
+
+#### BUILDING RULES
+
+# Classic all build rule
+all: dirs $(TARGET)
+
+# Create directories neede to build
+dirs:
+	mkdir -p $(BINDIR) $(BUILDDIR)
+
+# Make target from object files
+$(TARGET): $(OBJ)
+	$(CC) $^ -o $(TARGET) $(LIBS)
+
+# General rule how to make object file from source file
+$(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
+	$(CC) $(CFLAGS) -DGLADE_PATH='"$(GLADE_PATH)"' -c -o $@ $<
+
+# Pack target
+pack:
+	tar --exclude='run' --exclude='debian' --exclude='tests' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
+
+# Phony
+.PHONY: devel linux windows test clean install debian-package windows-package remove doc all dirs pack

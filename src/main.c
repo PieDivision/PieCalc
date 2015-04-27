@@ -40,7 +40,7 @@ typedef struct{
 
 /// Table of translations, first is pattern and second is replacement
 Translate table[] = {
-	{"RND", "rand()"},
+	{"RND", "rand"},
 	{"√", "sqrt("},
 	{"∛", "cbrt("},
 	{"log", "log("},
