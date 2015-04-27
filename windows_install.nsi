@@ -17,6 +17,9 @@
 	; The file to write
 	OutFile "bin/${APPNAME}-setup.exe"
 
+	; The icon
+	Icon "data\icon_128x128.ico"
+
 	; The default installation directory
 	InstallDir $PROGRAMFILES\${APPNAME}
 
@@ -72,9 +75,9 @@ Section "Install"
 
 	; Create shortcuts
 	;!insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-    	;CreateDirectory "$SMPROGRAMS\${COMPANYNAME}"
-    	;CreateShortCut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME}" "$INSTDIR\pie_calc.exe"
-    	;CreateShortcut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME}-uninstall" "$INSTDIR\Uninstall.exe"
+    	CreateDirectory "$SMPROGRAMS\${COMPANYNAME}"
+    	createShortCut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME}.lnk" "$INSTDIR\pie_calc.exe" "" "$INSTDIR\data\icon_128x128.ico"
+    	CreateShortcut "$SMPROGRAMS\${COMPANYNAME}\${APPNAME}-uninstall.lnk" "$INSTDIR\Uninstall.exe"
   	;!insertmacro MUI_STARTMENU_WRITE_END
 
 SectionEnd
