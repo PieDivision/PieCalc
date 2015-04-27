@@ -15,7 +15,7 @@
 	Name "${APPNAME}"
 
 	; The file to write
-	OutFile "${APPNAME}-setup.exe"
+	OutFile "bin/${APPNAME}-setup.exe"
 
 	; The default installation directory
 	InstallDir $PROGRAMFILES\${APPNAME}
