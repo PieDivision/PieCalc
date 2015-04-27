@@ -15,7 +15,7 @@
 	Name "${APPNAME}"
 
 	; The file to write
-	OutFile "${APPNAME}-setup.exe"
+	OutFile "bin/${APPNAME}-setup.exe"
 
 	; The default installation directory
 	InstallDir $PROGRAMFILES\${APPNAME}
@@ -42,7 +42,7 @@
     	!define MUI_FINISHPAGE_RUN_TEXT "Launch PieCalc!"
     	!define MUI_FINISHPAGE_RUN_FUNCTION "LaunchLink"
     	!define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
-    	!define MUI_FINISHPAGE_SHOWREADME $INSTDIR\README
+    	!define MUI_FINISHPAGE_SHOWREADME $INSTDIR\README.txt
 
   	!insertmacro MUI_PAGE_FINISH
 
@@ -62,7 +62,7 @@ Section "Install"
 	; Put files there
 	File /r "bin\*.*"
 	File /r "data\*.*"
-	File /r "gtk\bin\*.*"
+	File /r "gtk\bin\*.dll"
 
 	File LICENSE
 	File README.txt

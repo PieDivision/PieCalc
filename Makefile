@@ -77,7 +77,7 @@ pack:
 
 # Clean target
 clean:
-	rm -rf $(BUILDDIR) $(BINDIR) doc gtk PieCalc-1.0-setup.exe || true
+	rm -rf $(BUILDDIR) $(BINDIR) doc || true
 
 # Phony
 .PHONY: all dirs pack clean test install debian-package doc

@@ -247,7 +247,12 @@ double solve_fact(string expr){
 		return NAN;
 	}
 
-	return piemathFact((unsigned int)round(number));
+	if(rNumber > 65){
+		strcpy(error, "Number to calculate factorial is too big!");
+		return NAN;
+	}
+
+	return piemathFact((unsigned int)rNumber);
 }
 
 /**
