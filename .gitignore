@@ -5,3 +5,5 @@ data/pie_calc.glade~
 docs
 piecalc-1.0.tar.gz
 gtk*
+*.deb
+*.rpm
