@@ -80,7 +80,7 @@ clean:
 	rm -rf $(BUILDDIR) $(BINDIR) doc gtk || true
 
 # Phony
-.PHONY: all dirs pack clean test install debian-package
+.PHONY: all dirs pack clean test install debian-package doc
 
 prefix = /usr
 bindir = $(prefix)/bin
@@ -107,3 +107,6 @@ debian-package:
 
 remove:
 	rm -rf /usr/bin/piecalc /usr/share/piecalc /usr/share/man/man1/piecalc.1.gz
+
+doc:
+	doxygen
