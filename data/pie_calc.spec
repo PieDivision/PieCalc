@@ -24,11 +24,14 @@ make linux
 
 
 %install
+rm -rf %{buildroot}
 %make_install
 
+%check
+make test
 
 %files
-%doc README LICENSE
+%doc README.txt LICENSE
 /usr/bin/piecalc
 /usr/share/piecalc/piecalc.glade
 /usr/share/piecalc/icon_*.png
@@ -37,5 +40,9 @@ make linux
 
 
 %changelog
+* Mon Apr 27 2015 David Benes <xbenes41@stud.fit.vutbr.cz> 1.0
+- Final package for Fedora or RHEL
+
 * Wed Apr 15 2015 David Benes <xbenes41@stud.fit.vutbr.cz> 1.0
 - Initial package for Fedora
+

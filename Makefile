@@ -73,7 +73,7 @@ $(BUILDDIR)/%.o: $(SRC)/%.$(CODE)
 
 # Pack target
 pack:
-	tar --exclude='run' --exclude='debian' --exclude='tests' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
+	tar --exclude='run' --exclude='debian' --exclude='plan' --exclude='$(BINDIR)' --exclude='$(BUILDDIR)' -pczf piecalc-1.0.tar.gz *
 
 # Clean target
 clean:
