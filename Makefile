@@ -77,7 +77,7 @@ pack:
 
 # Clean target
 clean:
-	rm -rf $(BUILDDIR) $(BINDIR) doc gtk || true
+	rm -rf $(BUILDDIR) $(BINDIR) doc gtk PieCalc-1.0-setup.exe || true
 
 # Phony
 .PHONY: all dirs pack clean test install debian-package doc
@@ -104,6 +104,9 @@ install:
 
 debian-package:
 	./debian-package.sh
+
+windows-package: windows
+	makensis install_script.nsi
 
 remove:
 	rm -rf /usr/bin/piecalc /usr/share/piecalc /usr/share/man/man1/piecalc.1.gz

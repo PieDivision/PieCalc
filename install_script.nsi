@@ -66,10 +66,6 @@ Section "Install"
 
 	File LICENSE
 	File README.txt
-	File icon_32x32.png
-	File icon_64x64.png
-	File icon_128x128.png
-	File icon_256x256.png
 
 	; Tell the compiler to write an uninstaller and to look for a "Uninstall" section 
 	WriteUninstaller $INSTDIR\Uninstall.exe
