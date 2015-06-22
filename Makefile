@@ -61,6 +61,7 @@ test:
 # Clean target
 clean:
 	rm -rf $(BUILDDIR) $(BINDIR) docs || true
+	rm *rpm *deb &> /dev/null || true
 
 prefix = /usr
 bindir = $(prefix)/bin
