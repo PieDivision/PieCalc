@@ -9,3 +9,4 @@ Keywords[cs]=kalkulačka;příklad;rovnice;kovár;matematika;
 Keywords[en]=calculator;equation;solving;math;kovar;
 Exec=/usr/bin/piecalc %U
 Icon=/usr/share/piecalc/icon_256x256.png
+StartupNotify=true
